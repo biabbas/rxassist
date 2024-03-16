@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create a virtual environment named 'env' in the current directory
-python3 -m venv env
+virtualenv env
 
 # Activate the virtual environment
 source env/bin/activate
