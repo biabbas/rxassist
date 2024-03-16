@@ -1,0 +1,75 @@
+{% extends 'patient/base.html' %} {% block body %}
+<div id="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron" style="background-color: #a7e5fe; color: #000; border-radius: 10px;">
+          <h1 class="display-4">Welcome to RxAssist!</h1>
+          <p class="lead">Your personalized healthcare companion for accurate diagnoses and reliable recommendations.</p>
+          <hr class="my-4">
+          <p>Explore the various features and services provided to make your healthcare journey seamless and informed. <strong>Please be aware:</strong> Our AI tool is designed to be 97% accurate, with a potential margin of ±2% in predictions. While it's a powerful tool, there is a chance (albeit small) of inaccuracy. We strongly recommend waiting for a doctor's review of the machine's predictions before deciding on medications or appointments. Keep in mind that RxAssist is a prototype, and your feedback is invaluable as we strive for continuous improvement.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/about" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Drug Recommended</h4>
+                <p style="color: #808080;">Read about our diagnostic process and the underlying software at our <a href="/about">About Us</a> page.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/diagnosis" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Patient</h4>
+                <p>{{ patient }}</p>
+                <p style="color: #808080;">Test our cutting-edge diagnostic tool for free and explore the outcomes at our <a href="/diagnosis">Diagnosis</a> page.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/appointment" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Appointments Made</h4>
+                <p>{{ appointment }}</p>
+                <p style="color: #808080;">Our users have made a total of {{ appointment }} appointments. Easily manage your appointments and stay updated on your healthcare schedule <a href="/appointment">here</a>.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/doctors" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Doctors</h4>
+                <p>{{ doctor }}</p>
+                <p style="color: #808080;">Our dedicated team of doctors has been supporting Rx Assist, overseeing the entire process to ensure you receive the best care. Get to know our supportive medical professionals <a href="/doctors">here</a>.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="alert alert-success" style="color: green">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,248 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Rx about</title>
+
+    <link href="{% static 'core/css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/themify-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/flaticon.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'core/vendors/fontawesome/css/all.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{% static 'core/vendors/owl-carousel/owl.carousel.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'core/vendors/animate-css/animate.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/responsive.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header_area">
+      <div class="top_menu row m0"></div>
+      <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+            <a class="navbar-brand logo_h" href="/"
+              ><img src="{% static 'core/img/logo.png' %}" style="width:250px"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <div
+              class="collapse navbar-collapse offset"
+              id="navbarSupportedContent"
+            >
+              <ul class="nav navbar-nav menu_nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'doctors' %}">Doctors</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'reg' %}">Sign Up</a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="nav-link">
+                  <a class="main_btn_light" href="{% url 'login' %}">Sign in</a>
+                </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+            </div>
+            <div class="page_link">
+              <a href="/">Home</a>
+              <a href="{% url 'about' %}">About</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-area area-padding">
+      <div class="container">
+        <div class="area-heading row">
+          <div class="col-md-5 col-xl-4">
+            <h2>Rx: Assist</h2>
+            <h3>
+              Diagnosis For all
+            </h3>
+          </div>
+
+        </div>
+        
+        <div class="container mt-5" id="QuickTour">
+          <p>Welcome to RxAssist, your trusted companion in healthcare. 
+            At RxAssist, we believe in empowering individuals with easy access to accurate health information. 
+            Our platform is designed to provide personalized disease diagnosis and tailored drug recommendations, 
+            ensuring you receive the care you deserve. Whether you're seeking guidance on symptoms or looking to connect with healthcare professionals, 
+            RxAssist is here for you. We're dedicated to making your health journey smoother, 
+            offering a user-friendly experience that prioritizes your well-being. 
+            Join us on the path to a healthier tomorrow with RxAssist
+             - where accuracy meets personalized care.</p>
+
+      </div>
+
+      </div>
+      <section class="container mt-5" >
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title text-center mb-4">Quick Tour of Rx-Assist</h2>
+      
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card bg-light mb-4">
+                      <div class="card-body">
+                        <h4 class="card-title">Step 1: Sign Up</h4>
+                        <p>
+                          1. Click on the "Sign Up" button in the navigation bar.<br>
+                          2. Provide a unique username and your email address. Additionally you have to provide your date of birth, country and region information.<br>
+                          3. Click "Continue" to create your account.
+                        </p>
+                      </div>
+                    </div>
+      
+      
+                    <div class="card bg-light">
+                      <div class="card-body">
+                        <h4 class="card-title">Step 3: Make Diagnosis</h4>
+                        <p>
+                          1. Go to the "Make Diagnosis" page.<br>
+                          2. Enter five symptoms you are experiencing.<br>
+                          3. Submit the form to receive an accurate disease diagnosis.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-md-6">
+                    <div class="card bg-light mb-4">
+                      <div class="card-body">
+                        <h4 class="card-title">Step 2: Sign In</h4>
+                        <p>
+                          1. Once signed up, click the "Sign In" button in the navigation bar.<br>
+                          2. Enter your username and password.<br>
+                          3. Click "Continue" to access your account.
+                        </p>
+                      </div>
+                    </div>
+      
+                    <div class="card bg-light mb-4">
+                      <div class="card-body">
+                        <h4 class="card-title">Step 4: Diagnostic Results</h4>
+                        <p>
+                          1. Visit the "Diagnostic Results" page to view all diagnosed results.<br>
+                          2. Find details about the diagnosed disease and recommended actions.<br>
+                          3. If available, AI-driven prescriptions will be provided.
+                        </p>
+                      </div>
+                    </div>
+      
+                    <div class="card bg-light">
+                      <div class="card-body">
+                        <h4 class="card-title">Step 5: Request Appointment</h4>
+                        <p>
+                          1. On the "Diagnostic Results" page, you can request an appointment.<br>
+                          2. Provide details like preferred day and time.<br>
+                          3. Submit the request for confirmation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <hr>
+      
+                <p class="text-center">
+                  Rx-Assist aims to streamline your healthcare journey by providing accurate diagnostics, personalized recommendations, and seamless appointment management. If you have any questions or need assistance, feel free to explore the "home" page or contact us through the "Contact Us" section. Welcome to Rx-Assist!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    
+
+      <footer class="footer-area area-padding-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-sm-6 single-footer-widget">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="/about/#QuickTour">Quick Tour</a></li>
+                <li><a href="/login">Contact Us</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/doctors">Doctors</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-xl-auto single-footer-widget">
+              <h4>Features</h4>
+              <ul>
+                <li><a href="/diagnosis">Disease Detection</a></li>
+                <li><a href="/result">Drug Recommendation</a></li>
+                <li><a href="/result">Take Appointment</a></li>
+                <li><a href="/appointment">Manage Appointment</a></li>
+              </ul>
+            </div>
+        
+            
+          </div>
+          <div class="row footer-bottom d-flex justify-content-between">
+            <p class="col-lg-8 col-sm-12 footer-text m-0">
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              All rights reserved
+            </p>
+  
+          </div>
+        </div>
+      </footer>
+
+    <script src="{% static 'core/j/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'core/j/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/j/stellar.js' %}"></script>
+    <script src="{% static 'core/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'core/j/waypoints.min.js' %}"></script>
+    <script src="{% static 'core/j/theme.js' %}"></script>
+  </body>
+</html>

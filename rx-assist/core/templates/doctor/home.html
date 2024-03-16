@@ -1,0 +1,76 @@
+{% extends 'doctor/base.html' %} {% block body %}
+<div id="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron" style="background-color: #a7e5fe; color: #000; border-radius: 10px;">
+          <h1 class="display-4">Welcome, Doctor!</h1>
+          <p class="lead">Thank you for your invaluable support in making RxAssist a reliable healthcare platform.</p>
+          <hr class="my-4">
+          <p>Explore the various features and services provided to enhance your healthcare practice. <strong>Please be aware:</strong> Our AI tool is designed to be 97% accurate, with a potential margin of ±2% in predictions. While it's a powerful tool, there is a chance (albeit small) of inaccuracy. We encourage your expertise in reviewing machine predictions before deciding on medications or appointments. Keep in mind that RxAssist is a prototype, and your feedback is crucial for continuous improvement.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/commend" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Patients</h4>
+                <p style="color: #808080;">We have positively impacted the lives of {{ mypatients }} patients! Your expertise is making a difference. Spread even more positivity at our <a href="/commend">Drug Recommend</a> page.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/meet" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Upcoming Appointments</h4>
+                <p>{{ nextappointments }}</p>
+                <p style="color: #808080;">Exciting times ahead! We have {{ nextappointments }} upcoming appointments. Manage them with ease and stay on top of schedule <a href="/meet">here</a>.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/meet" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Appointments</h4>
+                <p>{{ appointments }}</p>
+                <p style="color: #808080;">We're doing amazing! We've successfully treated {{ appointments }} patients. Ready to make even more impact? Schedule additional appointments at our <a href="/meet">Appointments</a> page.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+        <div class="col-xl-3 col-md-6 mb-3">
+          <a href="/commend" class="text-decoration-none">
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h4 class="card-title" style="color: #000;">Total Patients in Line</h4>
+                <p>{{ patients }}</p>
+                <p style="color: #808080;">You're part of a fantastic team! Currently, there are {{ patients }} patients in line. Your dedication is vital in ensuring everyone receives the best care. Review more patients and continue making a positive impact <a href="/commend">here</a>.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="alert alert-success" style="color: green">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

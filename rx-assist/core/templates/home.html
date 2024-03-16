@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Rx Assist</title>
+
+    <link href="{% static 'core/css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/themify-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/flaticon.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'core/vendors/fontawesome/css/all.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'core/css/cloudfare.css' %}"
+      integrity="sha512-R+xPS2VPCAFvLRy+I4PgbwkWjw1z5B5gNDYgJN5LfzV4gGNeRQyVrY7Uk59rX+c8tzz63j8DeZPLqmXvBxj8pA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      href="{% static 'core/vendors/owl-carousel/owl.carousel.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'core/vendors/animate-css/animate.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'core/css/responsive.css' %}" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{%static 'core/css/fontawesome-free/css/fontawesome.min.css' %}"
+    />
+
+  
+  </head>
+  <body>
+    <header class="header_area">
+      <div class="top_menu row m0"></div>
+      <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+            <a class="navbar-brand logo_h" href="/"
+              ><img src="{% static 'core/img/logo.png' %}" style="width:150px"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              style="width: 400px;background-color: black;"
+            >
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <div
+              class="collapse navbar-collapse offset"
+              id="navbarSupportedContent"
+            >
+              <ul class="nav navbar-nav menu_nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'doctors' %}">Doctors</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'reg' %}">Sign Up</a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="nav-link">
+                  <a class="main_btn_light" href="{% url 'login' %}">Sign in</a>
+                </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="banner-area d-flex align-items-center" noresize>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <h1>
+              Rx-Assist: Diagnosis for All.
+              
+            </h1>
+            <p>
+              RxAssist is a cutting-edge healthcare platform dedicated to 
+              providing comprehensive and accurate disease diagnosis for all. 
+              Our mission is to empower users by offering a user-friendly interface where 
+              individuals can input their symptoms, receive precise diagnoses, and gain access 
+              to tailored drug recommendations.
+            </p>
+            <a href="login/" class="main_btn">Make an Appointment</a>
+            <a href="doctors/" class="main_btn_light">View Available Doctors</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% block body %} {% endblock %}
+    <section class="hotline-area">
+      <div class="container">
+        <div class="row align-items-center">
+          <div
+            class="col-md-10 col-lg-6   col-xl-5"
+          >
+          <br><br>
+            <div class="about-content">
+              <h1><br><br>
+                Personalized Attention and Care
+                <br><br>
+              </h1>
+           
+              <p>
+                With a commitment to accuracy and efficiency, 
+                RxAssist ensures that users receive timely and reliable information, 
+                fostering informed healthcare decisions. 
+                Whether seeking initial guidance or connecting with healthcare professionals, 
+                RxAssist stands as a reliable companion on the journey to well-being.
+                Welcome to RxAssist, where accurate diagnoses meet personalized care for a healthier tomorrow.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+
+    
+    <footer class="footer-area area-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6 single-footer-widget">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/about/#QuickTour">Quick Tour</a></li>
+              <li><a href="/login">Contact Us</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/doctors">Doctors</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-xl-auto single-footer-widget">
+            <h4>Features</h4>
+            <ul>
+              <li><a href="/diagnosis">Disease Detection</a></li>
+              <li><a href="/result">Drug Recommendation</a></li>
+              <li><a href="/result">Take Appointment</a></li>
+              <li><a href="/appointment">Manage Appointment</a></li>
+            </ul>
+          </div>
+      
+          
+        </div>
+        <div class="row footer-bottom d-flex justify-content-between">
+          <p class="col-lg-8 col-sm-12 footer-text m-0">
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved
+          </p>
+
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'core/j/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'core/j/popper.js' %}"></script>
+    <script src="{% static 'core/j/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/j/stellar.js' %}"></script>
+    <script src="{% static 'core/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'core/j/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'core/j/waypoints.min.js' %}"></script>
+
+    <script src="{% static 'core/j/jquery.form.js' %}"></script>
+    <script src="{% static 'core/j/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'core/j/theme.js' %}"></script>
+  </body>
+</html>
