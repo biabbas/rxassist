@@ -1,0 +1,96 @@
+Unique Disease Names in Training Data: 
+-  Acne
+-  Allergy
+-  Diabetes
+-  Fungal infection
+-  Urinary tract infection
+-  Malaria
+-  Migraine
+-  Hepatitis B
+-  AIDS
+-  GERD
+-  Chronic cholestasis
+-  Drug Reaction
+-  Gastroenteritis
+-  Bronchial Asthma
+-  Hypertension
+-  Cervical Spondylosis
+-  Paralysis (brain hemorrhage)
+-  Jaundice
+-  Chicken Pox
+-  Dengue
+-  Typhoid
+-  Hepatitis A
+-  Hepatitis C
+-  Hepatitis D
+-  Hepatitis E
+-  Alcoholic Hepatitis
+-  Tuberculosis
+-  Common Cold
+-  Pneumonia
+-  Piles
+-  Heart Attack
+-  Varicose Veins
+-  Hypothyroidism
+-  Hyperthyroidism
+-  Hypoglycemia
+-  Osteoarthritis
+-  Arthritis
+-  (vertigo) Paroxysmal Positional Vertigo
+-  Psoriasis
+-  Impetigo
+-  Dimorphic Hemorrhoids (Piles)
+Number of diseases =  41
+
+Unique Ages in Training Data: 
+-  23
+-  20
+-  37
+-  26
+-  24
+-  28
+-  21
+-  22
+-  36
+-  33
+-  30
+-  39
+-  38
+-  35
+-  17
+-  27
+-  87
+-  77
+-  67
+-  57
+-  47
+-  32
+-  34
+-  13
+-  25
+-  40
+-  45
+-  42
+-  50
+-  48
+-  55
+-  44
+-  52
+-  46
+-  58
+-  49
+-  53
+-  29
+-  41
+-  31
+-  43
+-  60
+-  56
+-  63
+-  62
+-  65
+Number of Ages =  46
+
+
+Number of Drugs = 5125
+

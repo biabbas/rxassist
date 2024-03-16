@@ -1,0 +1,44 @@
+Unique  Disease s in Training Data: 
+Number of items:  41
+-  Acne
+-  Allergy
+-  Diabetes
+-  Fungal infection
+-  Urinary tract infection
+-  Malaria
+-  Migraine
+-  Hepatitis B
+-  AIDS
+-  GERD
+-  Chronic cholestasis
+-  Drug Reaction
+-  Gastroenteritis
+-  Bronchial Asthma
+-  Hypertension
+-  Cervical Spondylosis
+-  Paralysis (brain hemorrhage)
+-  Jaundice
+-  Chicken Pox
+-  Dengue
+-  Typhoid
+-  Hepatitis A
+-  Hepatitis C
+-  Hepatitis D
+-  Hepatitis E
+-  Alcoholic Hepatitis
+-  Tuberculosis
+-  Common Cold
+-  Pneumonia
+-  Heart Attack
+-  Varicose Veins
+-  Hypothyroidism
+-  Hyperthyroidism
+-  Hypoglycemia
+-  Osteoarthritis
+-  Arthritis
+-  (vertigo) Paroxysmal Positional Vertigo
+-  Psoriasis
+-  Impetigo
+-  Dimorphic Hemorrhoids (Piles)
+-  Peptic Ulcer Disease
+Number of items:  41
