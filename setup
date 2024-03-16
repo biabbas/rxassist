@@ -36,3 +36,5 @@ pip install Django==4.0.6 \
             wheel==0.42.0
 
 echo "Django environment setup complete."
+echo "My sql is required for this project run. Please ensure it is installed"
+echo "Note: This system was tested on Python 3.11.6 and virtualenv 20.25.0."
