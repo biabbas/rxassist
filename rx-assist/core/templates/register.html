@@ -70,9 +70,17 @@
     <label class="col-form-label">Email </label>
     <div class="row">
      <div class="col">
-         <input type="email" class="form-control" name="email" placeholder="Enter Email" required="" value="">
+         <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email" required="" value="">
      </div>
-     </div>          
+     <div class = "col">
+        <button onclick="sendOTP()">Send OTP</button>
+     </div>
+     </div>      
+     <div class = "row">
+        <div class = "col">
+            <input class="form-control" id="otp" name="otp" placeholder="Enter OTP"  required value="" style="display: none;">
+        </div>
+     </div>    
  </div>
 
 
@@ -87,7 +95,7 @@
             </div>          
         </div>
 
- <button type="submit" id="reg_btn" class="btn btn-primary" style="width: 100%;">Continue</button>
+ <button type="submit" id="reg_btn" class="btn btn-primary" style="width: 100%;" onclick="verifyOTP()">Continue</button>
 
  <br>
                    <br>
@@ -115,4 +123,58 @@
 
 </div>
 </div>
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+<script>
+function showOTP() {
+    var otpElement = document.getElementById("otp");
+    if (otpElement) {
+        otpElement.style.display = "block"; // Change "block" to any value that suits your display requirement
+    } else {
+        console.error("Element with ID 'otp' not found.");
+    }
+}
+
+function sendOTP(){
+    const email = document.getElementById("email");
+    
+    window.otp_val = Math.floor(Math.random() * 10000);
+
+    let email_body = `<h2>Please complete your signup for Rx-assist using code <\h2>${otp_val}`
+    Email.send({
+    SecureToken : "9f2817e6-d3b2-4c89-a665-17f0f90c2a13",
+    To : email.value,
+    From : "rxassist55@yahoo.com",
+    Subject : "Rx Assist signup help",
+    Body : email_body
+}).then(
+    message => {
+  if (message === "OK") {
+    alert("Otp sent to email " + email.value);
+    showOTP();
+  }
+  else {
+    alert("Otp could not be sent. " + message );
+  }
+}
+);
+}
+
+function verifyOTP() {
+    var otpElement = document.getElementById("otp");
+    otpElement.style.display = "flex";
+    if (!otpElement.value) {
+        event.preventDefault();
+        return;
+    }
+    const otp_inp = otpElement.value;
+    if (otp_inp === window.otp_val.toString()) {
+    } else {
+        alert("Invalid email OTP. Email verification failed");
+        // Prevent form submission by returning false or using event.preventDefault()
+        event.preventDefault();
+    }
+}
+
+</script>
 {% endblock %}
