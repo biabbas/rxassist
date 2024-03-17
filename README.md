@@ -24,7 +24,7 @@ Setup Instructions
 4. Create Database and Import Tables:
    - Create a new database in MySQL.
    - Import tables using rxdb.sql:
-     `mysql -u root < rxdb.sql`
+     `mysql -u root rx_db < rxdb.sql`
 
 5. Run Diagnosis.py and Prescription.py:
    - Execute Diagnosis.py and Prescription.py using Python:
