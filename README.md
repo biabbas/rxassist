@@ -23,6 +23,7 @@ Setup Instructions
 
 4. Create Database and Import Tables:
    - Create a new database in MySQL.
+     `mysql create database rx_db`
    - Import tables using rxdb.sql:
      `mysql -u root rx_db < rxdb.sql`
 
