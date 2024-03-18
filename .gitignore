@@ -1,0 +1,10 @@
+# Ignore compiled Python files
+*.pyc
+__*__
+rx-assist/model/*.pkl
+env
+sqlMessage.txt
+extras.html
+package.json
+rx-assist/node_modules
+
