@@ -1,8 +1,10 @@
 # Ignore compiled Python files
 *.pyc
 __*__
+__pyc*
+rx-assist/core/migrations/__pycache__/*
 rx-assist/model/*.pkl
-env
+env*
 sqlMessage.txt
 extras.html
 package.json
