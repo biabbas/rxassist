@@ -16,6 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `appointments`
+--
+
+DROP TABLE IF EXISTS `appointments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `appointments` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `approved` tinyint(1) NOT NULL,
+  `time` time DEFAULT NULL,
+  `ment_day` datetime(6) DEFAULT NULL,
+  `created_on` datetime(6) NOT NULL,
+  `doctor_id` bigint DEFAULT NULL,
+  `medical_id` bigint DEFAULT NULL,
+  `patient_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_appointments_doctor_id` (`doctor_id`),
+  KEY `fk_appointments_medical_id` (`medical_id`),
+  KEY `fk_appointments_patient_id` (`patient_id`),
+  CONSTRAINT `fk_appointments_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_appointments_medical_id` FOREIGN KEY (`medical_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_appointments_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `appointments`
+--
+
+LOCK TABLES `appointments` WRITE;
+/*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `auth_group`
 --
 
@@ -220,6 +255,30 @@ LOCK TABLES `core_user_user_permissions` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `diagnosis_symptoms`
+--
+
+DROP TABLE IF EXISTS `diagnosis_symptoms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `diagnosis_symptoms` (
+  `patient_diagnosis_id` bigint NOT NULL,
+  `symptom` varchar(200) NOT NULL,
+  UNIQUE KEY `unique_patient_diagnosis_symptom` (`patient_diagnosis_id`,`symptom`),
+  CONSTRAINT `fk_diagnosis_symptoms_patient_diagnosis_id` FOREIGN KEY (`patient_diagnosis_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diagnosis_symptoms`
+--
+
+LOCK TABLES `diagnosis_symptoms` WRITE;
+/*!40000 ALTER TABLE `diagnosis_symptoms` DISABLE KEYS */;
+/*!40000 ALTER TABLE `diagnosis_symptoms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `django_admin_log`
 --
 
@@ -331,6 +390,38 @@ LOCK TABLES `django_session` WRITE;
 INSERT INTO `django_session` VALUES ('bv75texjw8quxynb7fpu9oao8kvkwh9k','.eJxVjEEOwiAQRe_C2pDCFAGX7nsGMsxMpWpoUtqV8e7apAvd_vfef6mE21rS1mRJE6uLMur0u2Wkh9Qd8B3rbdY013WZst4VfdCmh5nleT3cv4OCrXxr2wlFcdmM5EPvwTEFFymcUbyzI_YOcsw5IPgYGKzYDoCMGPDMxEa9P-jtOAo:1oJm2i:p7aBde_VFneuZyz75qZbYff4P-5gEwR4sEQUrR5KzhQ','2022-08-19 01:22:24.885145'),('erpaora7n0svpx9dnc8nd1eay58d2f9v','.eJxVjEEOwiAQRe_C2hBaUAaX7nuGZoYZpGogKe3KeHfbpAvd_vfef6sR1yWPa5N5nFhdFajT70YYn1J2wA8s96pjLcs8kd4VfdCmh8ryuh3u30HGlrf6QgEdeGeQxBl2cBbsLEByhBLYA6BPPbL06MSmAJ0VJo_WxI3aqD5f-As4pQ:1rGGAg:5zbAWU9KqdZc1tEvDLsrfMhkL_pwpfPcz9vwJgIR6Is','2024-01-04 10:20:54.656462'),('p9jp7z2shobhshemi1w06o7vkr1ex1yp','.eJxVjEEOwiAQRe_C2pBCKQwu3XsGMsxMpWrapLQr492VpAvdvvf-f6mE-1bSXmVNE6uzAnX6ZRnpIXMTfMf5tmha5m2dsm6JPmzV14XleTnav4OCtbS1d9jDGIJjMSAC1kQcg83WGesCEbPzRHGIg8k-QMeSracOgb4IevX-AOh1N74:1rmzoa:2c3e9RdnhKGQFVVId4rzOg_nEkQdUm__rljP6l6ZtI0','2024-04-03 17:33:24.021168'),('qkpaj7v6cl4f7k6qqvrw2jha8bsg5k5s','.eJxVjEsOAiEQBe_C2hB6mKHFpXvPQGi6kVEDyXxWxrsbklno9lXVe6sQ962EfZUlzKwuCow6_Y4U01NqJ_yI9d50anVbZtJd0Qdd9a2xvK6H-3dQ4lp6DflMEwIgoOUEfrRemAYDMoChyaE31qCbhNH5BEJ2RJeSyewhE6nPF-UKN50:1rAqra:7_sz7s-ANZrFEFFnNEfKOAtSqB3WA28yhoHDC7wxbpQ','2023-12-20 12:18:50.111028'),('ycd4ngufas32sx3osp8i3cw090ibsdyo','.eJxVjMsOwiAQRf-FtSEjz-LSvd9AgBmkaiAp7cr475akC92ec-59Mx-2tfit0-JnZBfm2OmXxZCeVIfAR6j3xlOr6zJHPhJ-2M5vDel1Pdq_gxJ6GeuMCqURABqiNiYKMi7R5IwVQU07T1krGciAxUwSpDhbG9HuPlkE9vkC1lQ3RQ:1r9pGj:fhXEGQogkBRtXkz_JLYbs_HD0WotX3py-cCe41U3xDs','2023-12-17 16:24:33.020831');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_diagnosis`
+--
+
+DROP TABLE IF EXISTS `patient_diagnosis`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `patient_diagnosis` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `disease` varchar(200) NOT NULL,
+  `medicine` varchar(200) NOT NULL,
+  `created_on` datetime(6) NOT NULL,
+  `doctor_id` bigint DEFAULT NULL,
+  `patient_id` bigint NOT NULL,
+  `num_symptoms` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_patient_diagnosis_doctor_id` (`doctor_id`),
+  KEY `fk_patient_diagnosis_patient_id` (`patient_id`),
+  CONSTRAINT `fk_patient_diagnosis_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_patient_diagnosis_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_diagnosis`
+--
+
+LOCK TABLES `patient_diagnosis` WRITE;
+/*!40000 ALTER TABLE `patient_diagnosis` DISABLE KEYS */;
+/*!40000 ALTER TABLE `patient_diagnosis` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -341,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-23 13:43:28
+-- Dump completed on 2024-03-23 16:22:35

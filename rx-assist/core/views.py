@@ -1,7 +1,7 @@
 import numpy as np
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Medical, User, Ment, Profile
+from .models import User, Profile
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -31,12 +31,6 @@ def doctor_list(request):
     return render(request, 'doctors.html', context)
 
 def home(request):
-    # Delete all Medical objects for all users and get the number of deletions
-    #medical_deletions, _ = Medical.objects.all().delete()
-    # Delete all Ment objects for all users and get the number of deletions
-    #ment_deletions, _ = Ment.objects.all().delete()
-    #print(f"{medical_deletions} Medical objects deleted.")
-    #print(f"{ment_deletions} Ment objects deleted.")
     return render(request, 'home.html')
 
 
@@ -115,13 +109,15 @@ def loginView(request):
 def patient_home(request):
     doctor = User.objects.filter(is_doctor=True).count()
     patient = User.objects.filter(is_patient=True).count()
-    appointment = Ment.objects.filter(approved=True).count()
-    medical1 = Medical.objects.filter(medicine='Make Appointment').count()
-    medical2 = Medical.objects.all().count()
-    medical3 = int(medical2)-int(medical1)
-
+    c = connection.cursor()
+    c.execute("SELECT COUNT(*) from appointments where approved = 1")
+    row = c.fetchone()
+    approved_count = row[0] if row else -1
+    c.execute("SELECT COUNT(*) from patient_diagnosis where medicine != 'Make Appointment' ")
+    row = c.fetchone()
+    drugs = row[0] if row else -1
     context = { 'doctor': doctor,
-                   'appointment': appointment, 'patient': patient, 'drug': medical3}
+                   'appointment': appointment, 'patient': patient, 'drug': drugs}
     return render(request, 'patient/home.html', context)
 
 
@@ -211,23 +207,27 @@ def patient_result(request):
 def MakeMent(request):
     disease = request.POST.get('disease')
     userid = request.POST.get('userid')
-
     try:
-        check_medical = Ment.objects.filter(medical_id=disease).exists()
-        if (check_medical == False):
-            a = Ment(medical_id=disease, patient_id=userid)
-            a.save()
-            return JsonResponse({'status': 'saved'})
-        else:
+        c = connection.cursor()
+        c.execute("SELECT * FROM appointments WHERE medical_id = %s", [disease]) 
+        res = c.fetchone()
+        if res:
             print('Appointment Exist')
             return JsonResponse({'status': 'exist'})
+        else:
+            c.execute("INSERT INTO appointments (medical_id, patient_id) VALUES (%s, %s)", [disease, userid])
+            return JsonResponse({'status': 'saved'})
     except Exception as e:
         return JsonResponse({'status': 'error'})
+
 
 @login_required
 def patient_ment(request):
     user_id = request.user.id
-    appointment = Ment.objects.all().filter(patient_id=user_id)
+    c = connection.cursor()
+    c.execute("SELECT COUNT(*) FROM appointments WHERE patient_id=%s", [user_id])
+    row = c.fetchone()
+    appointment = row[0] if row else -1  
     context = {'appointment': appointment}
     return render(request, 'patient/appointment.html', context)
 
@@ -402,7 +402,9 @@ def SaveMent(request):
     pk = request.POST.get('pk')
     day = request.POST.get('day')
     time = request.POST.get('time')
-
+    c = connection.cursor()
+    c.execute("select * from appointments where id=%s",[pk])
+    row = c.fetchone()
     disease = Ment.objects.filter(pk=pk).exists()
     print(disease)
     user_id = request.user.id
