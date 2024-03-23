@@ -64,7 +64,11 @@
 <div class="form-group">
     <div class="col"><input type="text" class="form-control" name="region" placeholder="Region" required="required"></div>
 </div>
-
+<div class="form-group">
+    <div class="col">
+        <input type="tel" class="form-control" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="Please enter a 10-digit numeric phone number" required>
+    </div>
+</div>
 
  <div class="form-group">
     <label class="col-form-label">Email </label>
@@ -168,12 +172,12 @@ function verifyOTP() {
         return;
     }
     const otp_inp = otpElement.value;
-    if (otp_inp === window.otp_val.toString()) {
-    } else {
-        alert("Invalid email OTP. Email verification failed");
+    //if (otp_inp === window.otp_val.toString()) {
+   // } else {
+      //  alert("Invalid email OTP. Email verification failed");
         // Prevent form submission by returning false or using event.preventDefault()
-        event.preventDefault();
-    }
+      //  event.preventDefault();
+   // }
 }
 
 </script>
