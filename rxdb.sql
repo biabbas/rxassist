@@ -38,7 +38,7 @@ CREATE TABLE `appointments` (
   CONSTRAINT `fk_appointments_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_appointments_medical_id` FOREIGN KEY (`medical_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_appointments_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `core_profile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `core_profile_user_id_bf8ada58_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `core_user` (
   `phonenumber` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +194,7 @@ CREATE TABLE `core_user` (
 
 LOCK TABLES `core_user` WRITE;
 /*!40000 ALTER TABLE `core_user` DISABLE KEYS */;
-INSERT INTO `core_user` VALUES (1,'pbkdf2_sha256$320000$VlHDTmfgTjhPFkxz5JtJXz$kGQbdj52lpKcDB7UW4LnpT5OlbqpX1pC/H5wGV7DwuY=','2022-08-05 01:22:24.881763',1,'admin','','','admin@gmail.com',1,1,'2022-08-02 20:11:03.218100',0,0,NULL),(2,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:21:36.409364',0,'usama','Usama','Subhani','usamasubhani@gmail.com',0,1,'2022-08-02 20:14:43.000000',0,1,'+923350616908'),(5,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:12:58.142095',0,'shah','','','s@gmail.com',0,1,'2022-08-02 21:38:37.402888',1,0,NULL),(7,'pbkdf2_sha256$320000$ab5hrdjqEIFfbGqn5E9DsP$fKZiX95Y65RtSjwPBUTzwHbR6z25sU9BmD1RhO92vvA=','2022-08-04 15:51:28.280593',0,'ali','','','ali@gmail.com',0,1,'2022-08-03 23:15:38.305476',1,0,NULL),(8,'pbkdf2_sha256$720000$PLStY13iD4to5jtri0DiLL$WmOU8tWpoMmEjbnHsiJztRMtHGBr9kRDqUCIuD1FfSM=','2024-03-20 17:33:24.019315',1,'Abbas','BI Mohammed','Abbas','bimohammadabbas@gmail.com',1,1,'2023-12-03 16:12:14.000000',0,1,'6362187881'),(9,'pbkdf2_sha256$320000$6NZA63YIYD6XQLepdIZfAm$+AVIkJ+1zvzrQK7JpQDzi9GYrJB+DZBrKNWYiQTNQwo=','2023-12-17 09:40:25.901564',0,'biabbas','','','biabbbas@gmail.com',0,1,'2023-12-03 16:17:54.401205',1,0,NULL),(10,'pbkdf2_sha256$320000$gKf9SkIsAqYCBVxImeRAzn$0wQly0MM1C4b2rSBfJ17xYy+9xepgVpVKuexZu3VOqs=','2023-12-21 10:09:34.203451',0,'chirag','','','chirag@gmail.com',0,1,'2023-12-05 12:54:08.466811',1,0,NULL),(22,'pbkdf2_sha256$320000$rBePDBF1FUMm8ffzehkvmc$KM9AxprHgbZA6yA853O5534WJUbKmgPeupd18zytE6Y=','2023-12-17 13:06:42.086507',0,'bi79','','','bi@gg.com',0,1,'2023-12-17 13:06:22.298357',1,0,NULL),(23,'pbkdf2_sha256$320000$dUjJFEgBTFdeeS41JlXDTv$xQinrWgSbxDNLvhATMN2OXyeW7YR+QP3nDuE2nitHnk=',NULL,0,'bi88','','','bim@gmg.com',0,1,'2023-12-17 13:12:48.581583',1,0,NULL),(24,'pbkdf2_sha256$320000$Jnq0sjrDyIjqtfIMvSyZvs$ObbWqlr3ON8BzLz/UjB0hE8Zx8jRuIsYAIMRq630nlY=',NULL,0,'bi22','','','b@g.com',0,1,'2023-12-17 13:16:50.063247',1,0,NULL),(25,'pbkdf2_sha256$320000$Io6XQChsPcsyxq6eJg2qFS$fQqD1rN5TnBjjXNS2yJfYDHNVP89N0K9UMeMStijuuI=','2024-01-09 04:07:36.526785',0,'bi20','','','l@e.pum',0,1,'2023-12-17 13:21:54.966188',1,0,NULL),(26,'pbkdf2_sha256$320000$aUqiFXBNXANkVdCUWjqURg$Nkdy/P2ji1ZmSWaDqP2td/6r6y13CkM3ZP1AcW/ABHQ=','2023-12-20 15:14:21.483042',0,'ch','','','b@k.c',0,1,'2023-12-19 14:01:50.318791',1,0,NULL),(27,'pbkdf2_sha256$720000$DGHYY7dTnlc7nM34dD8guJ$r9Ry0IkRx0nafcfy7eeb7zPNWnVCjJGo+fNrabAyK8I=','2024-03-23 12:18:07.443439',0,'dem2','','','demo2@gmail.com',0,1,'2024-03-16 12:04:01.516441',1,0,NULL),(28,'pbkdf2_sha256$720000$1X3FSSDkKKfmErf3vy1JzI$NsDhEE+buJa7SXjkrjc6ybpPdp3o5/VvyjBUYpixQGA=','2024-03-20 17:28:02.182314',0,'mdabbas','','','bimohammadabbas@gmail.com',0,1,'2024-03-20 17:22:56.904305',1,0,NULL);
+INSERT INTO `core_user` VALUES (1,'pbkdf2_sha256$320000$VlHDTmfgTjhPFkxz5JtJXz$kGQbdj52lpKcDB7UW4LnpT5OlbqpX1pC/H5wGV7DwuY=','2022-08-05 01:22:24.881763',1,'admin','','','admin@gmail.com',1,1,'2022-08-02 20:11:03.218100',0,0,NULL),(2,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:21:36.409364',0,'usama','Usama','Subhani','usamasubhani@gmail.com',0,1,'2022-08-02 20:14:43.000000',0,1,'+923350616908'),(5,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:12:58.142095',0,'shah','','','s@gmail.com',0,1,'2022-08-02 21:38:37.402888',1,0,NULL),(7,'pbkdf2_sha256$320000$ab5hrdjqEIFfbGqn5E9DsP$fKZiX95Y65RtSjwPBUTzwHbR6z25sU9BmD1RhO92vvA=','2022-08-04 15:51:28.280593',0,'ali','','','ali@gmail.com',0,1,'2022-08-03 23:15:38.305476',1,0,NULL),(8,'pbkdf2_sha256$720000$PLStY13iD4to5jtri0DiLL$WmOU8tWpoMmEjbnHsiJztRMtHGBr9kRDqUCIuD1FfSM=','2024-03-20 17:33:24.019315',1,'Abbas','BI Mohammed','Abbas','bimohammadabbas@gmail.com',1,1,'2023-12-03 16:12:14.000000',0,1,'6362187881'),(9,'pbkdf2_sha256$320000$6NZA63YIYD6XQLepdIZfAm$+AVIkJ+1zvzrQK7JpQDzi9GYrJB+DZBrKNWYiQTNQwo=','2023-12-17 09:40:25.901564',0,'biabbas','','','biabbbas@gmail.com',0,1,'2023-12-03 16:17:54.401205',1,0,NULL),(10,'pbkdf2_sha256$320000$gKf9SkIsAqYCBVxImeRAzn$0wQly0MM1C4b2rSBfJ17xYy+9xepgVpVKuexZu3VOqs=','2023-12-21 10:09:34.203451',0,'chirag','','','chirag@gmail.com',0,1,'2023-12-05 12:54:08.466811',1,0,NULL),(22,'pbkdf2_sha256$320000$rBePDBF1FUMm8ffzehkvmc$KM9AxprHgbZA6yA853O5534WJUbKmgPeupd18zytE6Y=','2023-12-17 13:06:42.086507',0,'bi79','','','bi@gg.com',0,1,'2023-12-17 13:06:22.298357',1,0,NULL),(23,'pbkdf2_sha256$320000$dUjJFEgBTFdeeS41JlXDTv$xQinrWgSbxDNLvhATMN2OXyeW7YR+QP3nDuE2nitHnk=',NULL,0,'bi88','','','bim@gmg.com',0,1,'2023-12-17 13:12:48.581583',1,0,NULL),(24,'pbkdf2_sha256$320000$Jnq0sjrDyIjqtfIMvSyZvs$ObbWqlr3ON8BzLz/UjB0hE8Zx8jRuIsYAIMRq630nlY=',NULL,0,'bi22','','','b@g.com',0,1,'2023-12-17 13:16:50.063247',1,0,NULL),(25,'pbkdf2_sha256$320000$Io6XQChsPcsyxq6eJg2qFS$fQqD1rN5TnBjjXNS2yJfYDHNVP89N0K9UMeMStijuuI=','2024-01-09 04:07:36.526785',0,'bi20','','','l@e.pum',0,1,'2023-12-17 13:21:54.966188',1,0,NULL),(26,'pbkdf2_sha256$320000$aUqiFXBNXANkVdCUWjqURg$Nkdy/P2ji1ZmSWaDqP2td/6r6y13CkM3ZP1AcW/ABHQ=','2023-12-20 15:14:21.483042',0,'ch','','','b@k.c',0,1,'2023-12-19 14:01:50.318791',1,0,NULL),(27,'pbkdf2_sha256$720000$DGHYY7dTnlc7nM34dD8guJ$r9Ry0IkRx0nafcfy7eeb7zPNWnVCjJGo+fNrabAyK8I=','2024-03-23 12:42:22.440306',0,'dem2','','','demo2@gmail.com',0,1,'2024-03-16 12:04:01.516441',1,0,NULL),(28,'pbkdf2_sha256$720000$1X3FSSDkKKfmErf3vy1JzI$NsDhEE+buJa7SXjkrjc6ybpPdp3o5/VvyjBUYpixQGA=','2024-03-20 17:28:02.182314',0,'mdabbas','','','bimohammadabbas@gmail.com',0,1,'2024-03-20 17:22:56.904305',1,0,NULL);
 /*!40000 ALTER TABLE `core_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +214,7 @@ CREATE TABLE `core_user_groups` (
   KEY `core_user_groups_group_id_fe8c697f_fk_auth_group_id` (`group_id`),
   CONSTRAINT `core_user_groups_group_id_fe8c697f_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `core_user_groups_user_id_70b4d9b8_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +242,7 @@ CREATE TABLE `core_user_user_permissions` (
   KEY `core_user_user_permi_permission_id_35ccf601_fk_auth_perm` (`permission_id`),
   CONSTRAINT `core_user_user_permi_permission_id_35ccf601_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `core_user_user_permissions_user_id_085123d3_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +266,7 @@ CREATE TABLE `diagnosis_symptoms` (
   `symptom` varchar(200) NOT NULL,
   UNIQUE KEY `unique_patient_diagnosis_symptom` (`patient_diagnosis_id`,`symptom`),
   CONSTRAINT `fk_diagnosis_symptoms_patient_diagnosis_id` FOREIGN KEY (`patient_diagnosis_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +300,7 @@ CREATE TABLE `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +326,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +352,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +378,7 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +411,7 @@ CREATE TABLE `patient_diagnosis` (
   KEY `fk_patient_diagnosis_patient_id` (`patient_id`),
   CONSTRAINT `fk_patient_diagnosis_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_patient_diagnosis_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-23 17:54:33
+-- Dump completed on 2024-03-23 22:04:02
