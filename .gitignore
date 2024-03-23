@@ -2,11 +2,5 @@
 *.pyc
 __*__
 __pyc*
-rx-assist/core/migrations/__pycache__/*
-rx-assist/model/*.pkl
-env*
-sqlMessage.txt
-extras.html
-package.json
-rx-assist/node_modules
+.git_ignore
 
