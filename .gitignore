@@ -2,5 +2,8 @@
 *.pyc
 __*__
 __pyc*
-.git_ignore
-
+rx-assist/core/migrations/__pycache__/*
+rx-assist/model/*.pkl
+rx-assis/__pycache__
+env
+.gitignore

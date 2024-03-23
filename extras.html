@@ -1,0 +1,44 @@
+/*
+function sendOTP() {
+    try {
+    const nodemailer = require('nodemailer');
+    console.log('Nodemailer found!');
+    // Do something with nodemailer...
+} catch (error) {
+    alert('Nodemailer not found:', error);
+    // Alert that nodemailer is not found
+    alert('Nodemailer not found. Please make sure it is installed.');
+}
+
+    const email = document.getElementById("email");
+    window.otp_val = Math.floor(Math.random() * 10000);
+    let email_body = `<h2>Please complete your signup for Rx-assist using code: ${otpValue}</h2>`
+    // Create a transporter object using SMTP transport
+    let transporter = nodemailer.createTransport({
+        service: 'Yahoo',
+        auth: {
+            user: 'rxassist55@yahoo.com',
+            pass: 'h97T9BUdrww?gsj'
+        }
+    });
+
+    // Email content
+    let mailOptions = {
+        from: 'rxassist55@yahoo.com',
+        to: email,
+        subject: 'Rx Assist signup help',
+        html: email_body,
+    };
+
+    // Send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            alert("Otp could not be sent. Error:", error);
+        } else {
+            alert("Otp sent to email " + email);
+            showOTP();
+        }
+    });
+}
+
+*/

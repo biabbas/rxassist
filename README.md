@@ -52,7 +52,9 @@ This guide provides instructions on how to set up and run the project locally. F
 
 
 7. **Set up the Virtual Environment:**
-- Install all the required packages using pip.
+- Install all the required packages using pip and the requirements.txt.
+  `pip install -r requirements.txt`
+  This expands to the below.
   ```
   pip install Django==5.0.3
   pip install scikit-learn==1.3.2
