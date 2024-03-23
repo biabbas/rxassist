@@ -189,18 +189,23 @@ def MakePredict(request):
         message = f"Undetermined. Symptoms match multiple possible conditions: {result_candidates}. Further evaluation and diagnostic tests are required for a precise diagnosis."
         result = f"4: {result_candidates}"
 
-    a = Medical(s1=s1, s2=s2, s3=s3, s4=s4, s5=s5,disease=result, patient_id=id)
-    a.save()
+    c.execute("INSERT INTO patient_diagnosis (disease, patient_id) VALUES (%s, %s, %s)", [result, id])
+
 
     return JsonResponse({'status': message})
 
 @login_required
 def patient_result(request):
-    user_id = request.user.id
-    disease = Medical.objects.all().filter(patient_id=user_id)
-    context = {'disease': disease}
+    user_id = request.user.id  
+    try:
+        c = connection.cursor()
+        c.execute("SELECT * FROM patient_diagnosis WHERE patient_id = %s", [user_id])
+        diseases = c.fetchall()     
+        context = {'diseases': diseases}
+        return render(request, 'patient/result.html', context)
+    except Exception as e:
+        print(e)
 
-    return render(request, 'patient/result.html', context)
 
 @login_required
 @csrf_exempt
@@ -244,11 +249,15 @@ def doctor_home(request):
         return redirect('patient')
     c = connection.cursor()
     c.execute(f"SELECT COUNT(DATE(ment_day)) AS count_ment FROM core_ment WHERE DATE(ment_day) > CURDATE(); ")
-    res = c.fetchall()
-    nextappointments_count = res[0][0]
+    row = c.fetchone()
+    nextappointments_count = row[0] if row else -1
+    c.execute("SELECT COUNT(*) from appointments where approved = 1")
+    row = c.fetchone()
+    appointments_count = row[0] if row else -1
     mypatients_count = User.objects.filter(is_patient=True).count()
-    appointments_count = Ment.objects.filter(approved=True).count()
-    patients_count =  Medical.objects.filter(medicine='').count()
+    c.execute("Select count(*) from patient_diagnosis where medicine=''")
+    row = c.fetchone()
+    patients_count =  row[0] if row else -1
 
     context = {
         'mypatients': mypatients_count,
@@ -263,13 +272,16 @@ def doctor_home(request):
 def doctor_commend(request):
     user = request.user
     if user.is_patient:
-        return redirect('patient')
-    user_id = request.user.id
-    disease = Medical.objects.all()
-    context = {'disease': disease}
-
-    return render(request, 'doctor/result.html', context)
-
+        return redirect('patient') 
+    user_id = request.user.id 
+    try:
+        c = connection.cursor()
+        c.execute("SELECT * FROM patient_diagnosis")
+        diseases = c.fetchall()   
+        context = {'diseases': diseases}
+        return render(request, 'doctor/result.html', context)
+    except Exception as e:
+        print(e)
 
 @login_required
 @csrf_exempt
@@ -279,11 +291,15 @@ def MakeMend(request):
 
     print('Disease ID', disease)
     print('User ID is', userid)
+    c = connection.cursor()
+    c.execute("SELECT patient_id FROM patient_diagnosis WHERE id = %s", [disease_pk])
 
-    patient_id = Medical.objects.filter(
-        pk=disease).values_list('patient_id', flat=True)
-    patient_id = list(patient_id)
-    patient_id = patient_id[0]
+    row=c.fetchone()
+    if row:
+        patient_id = row[0]
+    else:
+        print("Error fetching patient id, Make drug recommend")
+        exit(0)
     disease_id = disease
 
     dob = Profile.objects.filter(
@@ -311,10 +327,13 @@ def MakeMend(request):
 
     print('Patient Sex is', sex)
 
-    sick = Medical.objects.filter(pk=disease).values_list('disease', flat=True)
-    sick = list(sick)
-    sick = sick[0]
-    sick = str(sick)
+    c.execute("SELECT disease FROM patient_diagnosis WHERE id = %s", [disease])
+    row = c.fetchone()
+    if row:
+        sick = str(row[0])
+    else:
+        print("Error fetching patient disease( from drug recommend)")
+        exit(0)
 
     print(f'Patient Disease Diagnosed is1\'{sick}\'')
 
@@ -360,8 +379,10 @@ def MakeMend(request):
 
         C_Rf = joblib.load('model/medical_rf.pkl')
         RFpred = C_Rf.predict(test)
-        existing_medicine = Medical.objects.filter(pk=disease).values_list('medicine', flat=True).first()
-        print("Existiong medicine,",existing_medicine)
+        c.execute("SELECT medicine FROM patient_diagnosis WHERE id = %s", [disease])
+        row = c.fetchone()
+        existing_medicine = str(row[0]) if row else "Error"    
+        print("Existing medicine,",existing_medicine)
         Pred = RFpred[0]
         if existing_medicine == Pred:
             C_NB = joblib.load('model/medical_nb.pkl')
@@ -375,13 +396,13 @@ def MakeMend(request):
         print('Predicted Drug Is', Pred)
 
         try:
-            Medical.objects.filter(pk=disease).update(medicine=Pred)
+            c.execute("UPDATE patient_diagnosis SET medicine = %s WHERE id = %s", [Pred, disease])
             return JsonResponse({'status': f'Drug {Pred} (Using {Model})'})
         except Exception as e:
             print(e)
     else:
         print('AI Can Not Recommend Drug')
-        Medical.objects.filter(pk=disease).update(medicine='Make Appointment')
+        c.execute("UPDATE patient_diagnosis SET medicine = 'Make Appointment' WHERE id = %s",[disease])
         return JsonResponse({'status': 'error'})
 
 
@@ -389,11 +410,17 @@ def MakeMend(request):
 def doctor_ment(request):
     user = request.user
     if user.is_patient:
-        return redirect('patient')
-    user_id = request.user.id
-    appointment = Ment.objects.all()
-    context = {'appointment': appointment}
-    return render(request, 'doctor/appointment.html', context)
+        return redirect('patient')   
+    user_id = request.user.id   
+    try:
+        c = connection.cursor()
+        c.execute("SELECT * FROM appointments")
+        appointment = c.fetchall()
+        context = {'appointment': appointment}
+        return render(request, 'doctor/appointment.html', context)
+    except Exception as e:
+        print(e)
+        return JsonResponse({'status': 'error'})
 
 
 @login_required
@@ -403,17 +430,14 @@ def SaveMent(request):
     day = request.POST.get('day')
     time = request.POST.get('time')
     c = connection.cursor()
-    c.execute("select * from appointments where id=%s",[pk])
+    c.execute("SELECT * FROM appointments WHERE id=%s", [pk])
     row = c.fetchone()
-    disease = Ment.objects.filter(pk=pk).exists()
-    print(disease)
-    user_id = request.user.id
-
+    
     try:
-        check_ment = Ment.objects.filter(pk=pk).exists()
-        if(check_ment == True):
-            Ment.objects.filter(id=pk).update(
-                approved=True, ment_day=day, time=time, doctor_id=user_id)
+        if row:  # Check if the appointment exists
+            user_id = request.user.id
+            c.execute("UPDATE appointments SET approved=TRUE, ment_day=%s, time=%s, doctor_id=%s WHERE id=%s",
+                      [day, time, user_id, pk])
             return JsonResponse({'status': 'Appointment Set'})
         else:
             print('Appointment Not Exist')
