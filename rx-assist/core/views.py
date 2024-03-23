@@ -112,7 +112,7 @@ def patient_home(request):
     c = connection.cursor()
     c.execute("SELECT COUNT(*) from appointments where approved = 1")
     row = c.fetchone()
-    approved_count = row[0] if row else -1
+    appointment = row[0] if row else -1
     c.execute("SELECT COUNT(*) from patient_diagnosis where medicine != 'Make Appointment' ")
     row = c.fetchone()
     drugs = row[0] if row else -1
@@ -230,9 +230,8 @@ def MakeMent(request):
 def patient_ment(request):
     user_id = request.user.id
     c = connection.cursor()
-    c.execute("SELECT COUNT(*) FROM appointments WHERE patient_id=%s", [user_id])
-    row = c.fetchone()
-    appointment = row[0] if row else -1  
+    c.execute("SELECT * FROM appointments WHERE patient_id=%s", [user_id])
+    appointment = c.fetchall()
     context = {'appointment': appointment}
     return render(request, 'patient/appointment.html', context)
 
@@ -248,7 +247,7 @@ def doctor_home(request):
     if user.is_patient:
         return redirect('patient')
     c = connection.cursor()
-    c.execute(f"SELECT COUNT(DATE(ment_day)) AS count_ment FROM core_ment WHERE DATE(ment_day) > CURDATE(); ")
+    c.execute(f"SELECT COUNT(DATE(ment_day)) AS count_ment FROM appointments WHERE DATE(ment_day) > CURDATE(); ")
     row = c.fetchone()
     nextappointments_count = row[0] if row else -1
     c.execute("SELECT COUNT(*) from appointments where approved = 1")
