@@ -1,4 +1,7 @@
-{% extends 'patient/base.html' %} {% load static %} {% block body %}
+{% extends 'patient/base.html' %}
+{% load static %}
+
+{% block body %}
 
 <div id="content-wrapper">
   <div class="container-fluid">
@@ -10,120 +13,13 @@
 
         <form method="POST" action="" class="myform">
           {% csrf_token %}
+          <input type="hidden" value="{{ user.id }}" name="user_id" id="user_id" />
 
-          <input type="hidden" value="{{ user.id }}" name="" id="user_id" />
-          <div class="form-group row">
-            <label for="Symptom" class="col-sm-2 col-form-label"
-              >1st Symptom</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                list="symp"
-                multiple="multiple"
-                name="Symptom1"
-                id="Symptom1"
-                placeholder="Please Choose Symptom"
-                required=""
-              />
-            </div>
-            <datalist id="symp">
-              {% for symp in symptoms %}
-              <option value="{{symp}}">{{symp}}</option>
-              {% endfor %}
-            </datalist>
+          <div id="symptom-fields" style="max-height: 200px; overflow-y: auto;">
+            <!-- Dynamic symptom fields will be added here -->
           </div>
 
-          <div class="form-group row">
-            <label for="Symptom2" class="col-sm-2 col-form-label"
-              >2nd Symptom</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                list="symp"
-                name="Symptom2"
-                id="Symptom2"
-                placeholder="Please Choose Symptom"
-                required=""
-              />
-            </div>
-            <datalist id="symp">
-              {% for symp in symptoms %}
-              <option value="{{symp}}">{{symp}}</option>
-              {% endfor %}
-            </datalist>
-          </div>
-
-          <div class="form-group row">
-            <label for="Symptom3" class="col-sm-2 col-form-label"
-              >3rd Symptom</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                list="symp"
-                name="Symptom3"
-                id="Symptom3"
-                placeholder="Please Choose Symptom"
-                required=""
-              />
-            </div>
-            <datalist id="symp">
-              {% for symp in symptoms %}
-              <option value="{{symp}}">{{symp}}</option>
-              {% endfor %}
-            </datalist>
-          </div>
-
-          <div class="form-group row">
-            <label for="Symptom4" class="col-sm-2 col-form-label"
-              >4th Symptom</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                multiple="multiple"
-                list="symp"
-                id="Symptom4"
-                name="Symptom4"
-                placeholder="Please Choose Symptom"
-                required=""
-              />
-            </div>
-            <datalist id="symp">
-              {% for symp in symptoms %}
-              <option value="{{symp}}">{{symp}}</option>
-              {% endfor %}
-            </datalist>
-          </div>
-
-          <div class="form-group row">
-            <label for="Symptom5" class="col-sm-2 col-form-label"
-              >5th Symptom</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                list="symp"
-                id="Symptom5"
-                name="Symptom5"
-                placeholder="Please Choose Symptom"
-                required=""
-              />
-            </div>
-            <datalist id="symp">
-              {% for symp in symptoms %}
-              <option value="{{symp}}">{{symp}}</option>
-              {% endfor %}
-            </datalist>
-          </div>
-
+          <button type="button" id="add-symptom">Add Symptom</button>
           <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-primary" id="predict_btn">
@@ -131,12 +27,77 @@
               </button>
             </div>
           </div>
-
           <div id="result" class="col-sm-10 offset-sm-3"></div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<datalist id="symp">
+  {% for symp in symptoms %}
+    <option value="{{symp}}">{{symp}}</option>
+  {% endfor %}
+</datalist>
+
+<script>
+  document.getElementById('add-symptom').addEventListener('click', function() {
+    var numSymptoms = document.querySelectorAll('.symptom').length + 1;
+    var newInput = document.createElement('div');
+    newInput.classList.add('input-group');
+    newInput.innerHTML = `
+      <input type="text" name="Symptom${numSymptoms}" placeholder="Enter Symptom ${numSymptoms}" class="form-control symptom" list="symp">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-outline-danger delete-symptom">Delete</button>
+      </div>
+    `;
+    document.getElementById('symptom-fields').appendChild(newInput);
+  });
+
+  document.getElementById('symptom-fields').addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-symptom')) {
+      event.target.closest('.input-group').remove();
+    }
+  });
+
+  document.getElementById('predict_btn').addEventListener('click', function(event) {
+    console.log('Button Predict Clicked');
+    
+    var symptomsArray = Array.from(document.querySelectorAll('.symptom')).map(input => input.value);
+    var uniqueSymptomsSet = new Set(symptomsArray);
+    var uniqueSymptomsList = Array.from(uniqueSymptomsSet);
+    var symptomsString = uniqueSymptomsList.join(',');
+
+    var id = $('.myform #user_id').val();
+    
+    console.log(symptomsString); // Logging symptomsString instead of symptoms
+    console.log(id);
+
+    if (symptomsString == '') { // Checking symptomsString for empty value
+        alert('Please Enter Symptoms');
+    } else {
+        var mydata = { id: id, symptoms: symptomsString };
+        $.ajax({
+            url: '{% url 'predict' %}', // Ensure that this URL is correctly generated
+            method: 'POST',
+            data: mydata,
+            success: function(data) {
+                if (data.status == 'error') {
+                    $('#result').html('');
+                    $('#result').append('<h3 style="width: 60%">Error: Invalid symptoms entered.</h3><br>');
+                } else {
+                    var x = data.status;
+                    console.log('Data Sent To The Backend');
+                    console.log('Predicted Disease', x);
+                    $('#result').html('');
+                    $('#result').append('<h3 style="width: 60%">Our prediction: ' + x +'</h3><br>');
+                    $('#result').append('<p style="color: red; width: 50%;">Note: This AI prediction serves as an initial diagnosis for your symptoms. It is essential to understand that AI predictions are preliminary and subject to further review by our medical professionals. Please await our doctors\' comprehensive assessment for the final prognosis tailored to your specific health needs.</p>');
+                }
+            },
+        });
+    }
+});
+
+</script>
 
 {% endblock %}

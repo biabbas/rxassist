@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
 from django.db import connection
+from datetime import datetime
 
 import os
 from django.contrib import messages
@@ -133,21 +134,14 @@ def diagnosis(request):
 
 @csrf_exempt
 def MakePredict(request):
-    s1 = request.POST.get('s1')
-    s2 = request.POST.get('s2')
-    s3 = request.POST.get('s3')
-    s4 = request.POST.get('s4')
-    s5 = request.POST.get('s5')
     id = request.POST.get('id')
-
-    list_b = [s1, s2, s3, s4, s5]
+    symptoms = request.POST.get('symptoms')
+    list_b = list(set(symptoms.split(',')))
     print(list_b)
-
     list_a = ['itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering', 'chills', 'joint_pain', 'stomach_pain', 'acidity', 'ulcers_on_tongue', 'muscle_wasting', 'vomiting', 'burning_micturition', 'spotting_ urination', 'fatigue', 'weight_gain', 'anxiety', 'cold_hands_and_feets', 'mood_swings', 'weight_loss', 'restlessness', 'lethargy', 'patches_in_throat', 'irregular_sugar_level', 'cough', 'high_fever', 'sunken_eyes', 'breathlessness', 'sweating', 'dehydration', 'indigestion', 'headache', 'yellowish_skin', 'dark_urine', 'nausea', 'loss_of_appetite', 'pain_behind_the_eyes', 'back_pain', 'constipation', 'abdominal_pain', 'diarrhoea', 'mild_fever', 'yellow_urine', 'yellowing_of_eyes', 'acute_liver_failure', 'fluid_overload', 'swelling_of_stomach', 'swelled_lymph_nodes', 'malaise', 'blurred_and_distorted_vision', 'phlegm', 'throat_irritation', 'redness_of_eyes', 'sinus_pressure', 'runny_nose', 'congestion', 'chest_pain', 'weakness_in_limbs', 'fast_heart_rate', 'pain_during_bowel_movements', 'pain_in_anal_region', 'bloody_stool', 'irritation_in_anus', 'neck_pain', 'dizziness', 'cramps', 'bruising', 'obesity', 'swollen_legs', 'swollen_blood_vessels', 'puffy_face_and_eyes', 'enlarged_thyroid',
               'brittle_nails', 'swollen_extremeties', 'excessive_hunger', 'extra_marital_contacts', 'drying_and_tingling_lips', 'slurred_speech', 'knee_pain', 'hip_joint_pain', 'muscle_weakness', 'stiff_neck', 'swelling_joints', 'movement_stiffness', 'spinning_movements', 'loss_of_balance', 'unsteadiness', 'weakness_of_one_body_side', 'loss_of_smell', 'bladder_discomfort', 'foul_smell_of urine', 'continuous_feel_of_urine', 'passage_of_gases', 'internal_itching', 'toxic_look_(typhos)', 'depression', 'irritability', 'muscle_pain', 'altered_sensorium', 'red_spots_over_body', 'belly_pain', 'abnormal_menstruation', 'dischromic _patches', 'watering_from_eyes', 'increased_appetite', 'polyuria', 'family_history', 'mucoid_sputum', 'rusty_sputum', 'lack_of_concentration', 'visual_disturbances', 'receiving_blood_transfusion', 'receiving_unsterile_injections', 'coma', 'stomach_bleeding', 'distention_of_abdomen', 'history_of_alcohol_consumption', 'fluid_overload', 'blood_in_sputum', 'prominent_veins_on_calf', 'palpitations', 'painful_walking', 'pus_filled_pimples', 'blackheads', 'scurring', 'skin_peeling', 'silver_like_dusting', 'small_dents_in_nails', 'inflammatory_nails', 'blister', 'red_sore_around_nose', 'yellow_crust_ooze']
     list_c = []
     for x in range(0, len(list_a)):
-
         list_c.append(0)
     Symptoms=0
     for z in range(0, len(list_a)):
@@ -188,8 +182,8 @@ def MakePredict(request):
     else:
         message = f"Undetermined. Symptoms match multiple possible conditions: {result_candidates}. Further evaluation and diagnostic tests are required for a precise diagnosis."
         result = f"4: {result_candidates}"
-
-    c.execute("INSERT INTO patient_diagnosis (disease, patient_id) VALUES (%s, %s, %s)", [result, id])
+    c = connection.cursor()
+    c.execute("INSERT INTO patient_diagnosis (disease, patient_id, medicine, created_on, num_symptoms) VALUES (%s, %s, '', %s, %s)", (result, id, datetime.now(), Symptoms))
 
 
     return JsonResponse({'status': message})
