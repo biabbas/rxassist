@@ -198,8 +198,9 @@ def patient_result(request):
     user_id = request.user.id  
     try:
         c = connection.cursor()
-        c.execute("SELECT * FROM patient_diagnosis WHERE patient_id = %s", [user_id])
+        c.execute("SELECT pd.id, cu.username, pd.disease, pd.medicine FROM patient_diagnosis pd Left outer JOIN core_user cu ON pd.doctor_id = cu.id WHERE patient_id = %s", [user_id])
         diseases = c.fetchall()     
+        print("diseaseon",diseases)
         context = {'diseases': diseases}
         return render(request, 'patient/result.html', context)
     except Exception as e:

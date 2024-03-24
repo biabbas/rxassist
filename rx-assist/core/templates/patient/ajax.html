@@ -3,10 +3,10 @@
       $('#tbody').on('click', '.btn_ment', function () {
         console.log('Button Appointment Clicked');
         let disease = $(this).attr('data-sid');
-        var userid = $('#tbody #user_id').val();
-  
-        console.log('Prediction ID is', disease);
-        console.log('User ID is', userid);
+        var userid =document.querySelector('#user_id').value;
+
+        alert('Prediction ID is', disease);
+        alert('User ID is', userid);
   
         mydata = { disease: disease, userid: userid };
         $.ajax({

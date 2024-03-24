@@ -25,17 +25,17 @@
             </tr>
           </thead>
           <tbody id="tbody">
-            <input type="hidden" value="{{ user.id }}" name="" id="user_id" />
+            <input value="{{ user.id }}" name="" id="user_id" />
 
-            {% for d in disease %}
+            {% for d in diseases %}
             <tr>
-              <td>{{ d.id }}</td>
-              <td>{{ d.patient.username }}</td>
-              <td>{{ d.disease }}</td>
-              {% if d.medicine == "" %}
+              <td>{{ d.0 }}</td>
+              <td>{{ d.1 }}</td>
+              <td>{{ d.2 }}</td>
+              {% if d.3 == "" %}
               <td>Yet Recommended</td>
               {% else %}
-              <td>{{ d.medicine }}</td>
+              <td>{{ d.3 }}</td>
               {% endif %}
               
               <td>
@@ -43,7 +43,7 @@
                   class="btn btn-sm btn-primary btn_plan btn_ment text-center alert-info"
                   
                   type="button"
-                  data-sid="{{d.id}}"
+                  data-sid="{{ d.0 }}"
                   value="Request"
                 />
               </td>
