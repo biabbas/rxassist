@@ -40,12 +40,13 @@
               
               <td>
                 <input
-                  class="btn btn-sm btn-primary btn_plan btn_ment text-center alert-info"
-                  
-                  type="button"
-                  data-sid="{{ d.0 }}"
-                  value="Request"
-                />
+    class="btn btn-sm btn-primary btn_plan btn_ment text-center alert-info"
+    type="button"
+    data-sid="{{ d.0 }}"
+    value="Request"
+    onclick="handleButtonClick(this)"
+/>
+
               </td>
             </tr>
 
@@ -131,5 +132,37 @@
     </div>
   </div>
 </div>
+<script>
+  function handleButtonClick(button) {
+    console.log('Button Appointment Clicked');
 
+    var disease = button.dataset.sid;
+    var userid = document.querySelector('#user_id').value;
+
+    console.log('Prediction ID is ' + disease);
+    console.log('User ID is ' + userid); 
+
+    var mydata = { disease: disease, userid: userid };
+    $.ajax({
+        url: '{% url 'appointment' %}',
+        method: 'POST',
+        data: mydata,
+
+        success: function (data) {
+            var x = data.status;
+            console.log('Data Sent To The Backend');
+            console.log('Appointment Status Is ', x);
+
+            if (x == 'saved') {
+                $('#ment_result').html('Appointment Was Successfully Requested');
+            } else if (x == 'exist') {
+                $('#ment_result').html('Appointment Request Exist');
+            } else {
+                $('#ment_result').html('Something Went Wrong');
+            }
+        },
+    });
+}
+
+</script>
 {% endblock %}

@@ -220,7 +220,7 @@ def MakeMent(request):
             print('Appointment Exist')
             return JsonResponse({'status': 'exist'})
         else:
-            c.execute("INSERT INTO appointments (medical_id, patient_id) VALUES (%s, %s)", [disease, userid])
+            c.execute("INSERT INTO appointments (approved, created_on, medical_id, patient_id) VALUES (0,%s,%s, %s)", [datetime.now(),disease, userid])
             return JsonResponse({'status': 'saved'})
     except Exception as e:
         return JsonResponse({'status': 'error'})

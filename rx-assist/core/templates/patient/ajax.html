@@ -1,37 +1,5 @@
 <script type="text/javascript">
     $(document).ready(function () {
-      $('#tbody').on('click', '.btn_ment', function () {
-        console.log('Button Appointment Clicked');
-        let disease = $(this).attr('data-sid');
-        var userid =document.querySelector('#user_id').value;
-
-        alert('Prediction ID is', disease);
-        alert('User ID is', userid);
-  
-        mydata = { disease: disease, userid: userid };
-        $.ajax({
-          url: ' {% url 'appointment' %}',
-          method: 'POST',
-          data: mydata,
-  
-          success: function (data) {
-            x = data.status;
-            console.log('Data Sent To The Backend');
-            console.log('Appointment Status Is ', x);
-  
-            if (x == 'saved') {
-              $('#ment_result').html('');
-              $('#ment_result').append('Appointment Was Successfully Requested');
-            } else if (x == 'exist') {
-              $('#ment_result').html('');
-              $('#ment_result').append('Appointment Request Exist');
-            } else {
-              $('#ment_result').html('');
-              $('#ment_result').append('Something Went Wrong');
-            }
-          },
-        });
-      });
   
   
       $('#tbody').on('click', '.btn_view', function () {
