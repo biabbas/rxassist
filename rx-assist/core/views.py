@@ -162,7 +162,7 @@ def MakePredict(request):
     test = np.array(test).reshape(1, -1)
     modelDT = joblib.load('model/decision_tree.pkl')
     modelNB = joblib.load('model/naive_bayes.pkl')
-    modelLP = joblib.load('model/lopistic_regression.pkl')
+    modelLP = joblib.load('model/logistic_regression.pkl')
     modelRF = joblib.load('model/random_forest.pkl')
     DTpred = modelDT.predict(test)
     NBpred = modelNB.predict(test)
