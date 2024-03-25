@@ -52,18 +52,20 @@ def registerUser(request):
         region = request.POST['region']
         country = request.POST['country']
         gender = request.POST['gender']
-
+        phone = request.POST['phone']
+        print(phone)
         # Check if the username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, f'Username \'{username}\' already exists. Please choose a different username.')
             return redirect('reg')
-
+        
         
         user = User.objects.create(
             username=username,
             email=email,
             password=make_password(password),
-            is_patient=True
+            is_patient=True,
+            phonenumber = phone
         )
 
         
