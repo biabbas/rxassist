@@ -294,7 +294,7 @@ def MakeMend(request):
     print('Disease ID', disease)
     print('User ID is', userid)
     c = connection.cursor()
-    c.execute("SELECT patient_id FROM patient_diagnosis WHERE id = %s", [disease_pk])
+    c.execute("SELECT patient_id FROM patient_diagnosis WHERE id = %s", [disease])
 
     row=c.fetchone()
     if row:
