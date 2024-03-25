@@ -38,7 +38,7 @@ CREATE TABLE `appointments` (
   CONSTRAINT `fk_appointments_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_appointments_medical_id` FOREIGN KEY (`medical_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_appointments_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (1,0,NULL,NULL,'2024-03-24 18:28:47.226662',NULL,5,27);
+INSERT INTO `appointments` VALUES (1,0,NULL,NULL,'2024-03-24 18:28:47.226662',NULL,5,27),(2,0,NULL,NULL,'2024-03-25 16:09:25.732995',NULL,7,27),(3,0,NULL,NULL,'2024-03-25 16:10:52.801854',NULL,8,27),(4,0,NULL,NULL,'2024-03-25 16:11:03.948686',NULL,6,27);
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `core_profile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `core_profile_user_id_bf8ada58_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `core_user` (
   `phonenumber` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `core_user` (
 
 LOCK TABLES `core_user` WRITE;
 /*!40000 ALTER TABLE `core_user` DISABLE KEYS */;
-INSERT INTO `core_user` VALUES (1,'pbkdf2_sha256$320000$VlHDTmfgTjhPFkxz5JtJXz$kGQbdj52lpKcDB7UW4LnpT5OlbqpX1pC/H5wGV7DwuY=','2022-08-05 01:22:24.881763',1,'admin','','','admin@gmail.com',1,1,'2022-08-02 20:11:03.218100',0,0,NULL),(2,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:21:36.409364',0,'usama','Usama','Subhani','usamasubhani@gmail.com',0,1,'2022-08-02 20:14:43.000000',0,1,'+923350616908'),(5,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:12:58.142095',0,'shah','','','s@gmail.com',0,1,'2022-08-02 21:38:37.402888',1,0,NULL),(7,'pbkdf2_sha256$320000$ab5hrdjqEIFfbGqn5E9DsP$fKZiX95Y65RtSjwPBUTzwHbR6z25sU9BmD1RhO92vvA=','2022-08-04 15:51:28.280593',0,'ali','','','ali@gmail.com',0,1,'2022-08-03 23:15:38.305476',1,0,NULL),(8,'pbkdf2_sha256$720000$PLStY13iD4to5jtri0DiLL$WmOU8tWpoMmEjbnHsiJztRMtHGBr9kRDqUCIuD1FfSM=','2024-03-20 17:33:24.019315',1,'Abbas','BI Mohammed','Abbas','bimohammadabbas@gmail.com',1,1,'2023-12-03 16:12:14.000000',0,1,'6362187881'),(9,'pbkdf2_sha256$320000$6NZA63YIYD6XQLepdIZfAm$+AVIkJ+1zvzrQK7JpQDzi9GYrJB+DZBrKNWYiQTNQwo=','2023-12-17 09:40:25.901564',0,'biabbas','','','biabbbas@gmail.com',0,1,'2023-12-03 16:17:54.401205',1,0,NULL),(10,'pbkdf2_sha256$320000$gKf9SkIsAqYCBVxImeRAzn$0wQly0MM1C4b2rSBfJ17xYy+9xepgVpVKuexZu3VOqs=','2023-12-21 10:09:34.203451',0,'chirag','','','chirag@gmail.com',0,1,'2023-12-05 12:54:08.466811',1,0,NULL),(22,'pbkdf2_sha256$320000$rBePDBF1FUMm8ffzehkvmc$KM9AxprHgbZA6yA853O5534WJUbKmgPeupd18zytE6Y=','2023-12-17 13:06:42.086507',0,'bi79','','','bi@gg.com',0,1,'2023-12-17 13:06:22.298357',1,0,NULL),(23,'pbkdf2_sha256$320000$dUjJFEgBTFdeeS41JlXDTv$xQinrWgSbxDNLvhATMN2OXyeW7YR+QP3nDuE2nitHnk=',NULL,0,'bi88','','','bim@gmg.com',0,1,'2023-12-17 13:12:48.581583',1,0,NULL),(24,'pbkdf2_sha256$320000$Jnq0sjrDyIjqtfIMvSyZvs$ObbWqlr3ON8BzLz/UjB0hE8Zx8jRuIsYAIMRq630nlY=',NULL,0,'bi22','','','b@g.com',0,1,'2023-12-17 13:16:50.063247',1,0,NULL),(25,'pbkdf2_sha256$320000$Io6XQChsPcsyxq6eJg2qFS$fQqD1rN5TnBjjXNS2yJfYDHNVP89N0K9UMeMStijuuI=','2024-01-09 04:07:36.526785',0,'bi20','','','l@e.pum',0,1,'2023-12-17 13:21:54.966188',1,0,NULL),(26,'pbkdf2_sha256$320000$aUqiFXBNXANkVdCUWjqURg$Nkdy/P2ji1ZmSWaDqP2td/6r6y13CkM3ZP1AcW/ABHQ=','2023-12-20 15:14:21.483042',0,'ch','','','b@k.c',0,1,'2023-12-19 14:01:50.318791',1,0,NULL),(27,'pbkdf2_sha256$720000$DGHYY7dTnlc7nM34dD8guJ$r9Ry0IkRx0nafcfy7eeb7zPNWnVCjJGo+fNrabAyK8I=','2024-03-23 18:36:58.679542',0,'dem2','','','demo2@gmail.com',0,1,'2024-03-16 12:04:01.516441',1,0,NULL),(28,'pbkdf2_sha256$720000$1X3FSSDkKKfmErf3vy1JzI$NsDhEE+buJa7SXjkrjc6ybpPdp3o5/VvyjBUYpixQGA=','2024-03-20 17:28:02.182314',0,'mdabbas','','','bimohammadabbas@gmail.com',0,1,'2024-03-20 17:22:56.904305',1,0,NULL);
+INSERT INTO `core_user` VALUES (1,'pbkdf2_sha256$320000$VlHDTmfgTjhPFkxz5JtJXz$kGQbdj52lpKcDB7UW4LnpT5OlbqpX1pC/H5wGV7DwuY=','2022-08-05 01:22:24.881763',1,'admin','','','admin@gmail.com',1,1,'2022-08-02 20:11:03.218100',0,0,NULL),(2,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:21:36.409364',0,'usama','Usama','Subhani','usamasubhani@gmail.com',0,1,'2022-08-02 20:14:43.000000',0,1,'+923350616908'),(5,'pbkdf2_sha256$320000$jIAd9OCFatJrycM03PU8Pp$qgRRQXJg6vIlTHEXAFQudNOt4TE36cu09F5VGOLK0OA=','2022-08-05 01:12:58.142095',0,'shah','','','s@gmail.com',0,1,'2022-08-02 21:38:37.402888',1,0,NULL),(7,'pbkdf2_sha256$320000$ab5hrdjqEIFfbGqn5E9DsP$fKZiX95Y65RtSjwPBUTzwHbR6z25sU9BmD1RhO92vvA=','2022-08-04 15:51:28.280593',0,'ali','','','ali@gmail.com',0,1,'2022-08-03 23:15:38.305476',1,0,NULL),(8,'pbkdf2_sha256$720000$PLStY13iD4to5jtri0DiLL$WmOU8tWpoMmEjbnHsiJztRMtHGBr9kRDqUCIuD1FfSM=','2024-03-20 17:33:24.019315',1,'Abbas','BI Mohammed','Abbas','bimohammadabbas@gmail.com',1,1,'2023-12-03 16:12:14.000000',0,1,'6362187881'),(9,'pbkdf2_sha256$320000$6NZA63YIYD6XQLepdIZfAm$+AVIkJ+1zvzrQK7JpQDzi9GYrJB+DZBrKNWYiQTNQwo=','2023-12-17 09:40:25.901564',0,'biabbas','','','biabbbas@gmail.com',0,1,'2023-12-03 16:17:54.401205',1,0,NULL),(10,'pbkdf2_sha256$320000$gKf9SkIsAqYCBVxImeRAzn$0wQly0MM1C4b2rSBfJ17xYy+9xepgVpVKuexZu3VOqs=','2023-12-21 10:09:34.203451',0,'chirag','','','chirag@gmail.com',0,1,'2023-12-05 12:54:08.466811',1,0,NULL),(22,'pbkdf2_sha256$320000$rBePDBF1FUMm8ffzehkvmc$KM9AxprHgbZA6yA853O5534WJUbKmgPeupd18zytE6Y=','2023-12-17 13:06:42.086507',0,'bi79','','','bi@gg.com',0,1,'2023-12-17 13:06:22.298357',1,0,NULL),(23,'pbkdf2_sha256$320000$dUjJFEgBTFdeeS41JlXDTv$xQinrWgSbxDNLvhATMN2OXyeW7YR+QP3nDuE2nitHnk=',NULL,0,'bi88','','','bim@gmg.com',0,1,'2023-12-17 13:12:48.581583',1,0,NULL),(24,'pbkdf2_sha256$320000$Jnq0sjrDyIjqtfIMvSyZvs$ObbWqlr3ON8BzLz/UjB0hE8Zx8jRuIsYAIMRq630nlY=',NULL,0,'bi22','','','b@g.com',0,1,'2023-12-17 13:16:50.063247',1,0,NULL),(25,'pbkdf2_sha256$320000$Io6XQChsPcsyxq6eJg2qFS$fQqD1rN5TnBjjXNS2yJfYDHNVP89N0K9UMeMStijuuI=','2024-01-09 04:07:36.526785',0,'bi20','','','l@e.pum',0,1,'2023-12-17 13:21:54.966188',1,0,NULL),(26,'pbkdf2_sha256$320000$aUqiFXBNXANkVdCUWjqURg$Nkdy/P2ji1ZmSWaDqP2td/6r6y13CkM3ZP1AcW/ABHQ=','2023-12-20 15:14:21.483042',0,'ch','','','b@k.c',0,1,'2023-12-19 14:01:50.318791',1,0,NULL),(27,'pbkdf2_sha256$720000$DGHYY7dTnlc7nM34dD8guJ$r9Ry0IkRx0nafcfy7eeb7zPNWnVCjJGo+fNrabAyK8I=','2024-03-25 16:51:29.657846',0,'dem2','','','demo2@gmail.com',0,1,'2024-03-16 12:04:01.516441',1,0,NULL),(28,'pbkdf2_sha256$720000$1X3FSSDkKKfmErf3vy1JzI$NsDhEE+buJa7SXjkrjc6ybpPdp3o5/VvyjBUYpixQGA=','2024-03-20 17:28:02.182314',0,'mdabbas','','','bimohammadabbas@gmail.com',0,1,'2024-03-20 17:22:56.904305',1,0,NULL);
 /*!40000 ALTER TABLE `core_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `core_user_groups` (
   KEY `core_user_groups_group_id_fe8c697f_fk_auth_group_id` (`group_id`),
   CONSTRAINT `core_user_groups_group_id_fe8c697f_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `core_user_groups_user_id_70b4d9b8_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +243,7 @@ CREATE TABLE `core_user_user_permissions` (
   KEY `core_user_user_permi_permission_id_35ccf601_fk_auth_perm` (`permission_id`),
   CONSTRAINT `core_user_user_permi_permission_id_35ccf601_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `core_user_user_permissions_user_id_085123d3_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,10 +264,10 @@ DROP TABLE IF EXISTS `diagnosis_symptoms`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `diagnosis_symptoms` (
   `patient_diagnosis_id` bigint NOT NULL,
-  `symptom` varchar(200) NOT NULL,
+  `symptom` varchar(766) DEFAULT NULL,
   UNIQUE KEY `unique_patient_diagnosis_symptom` (`patient_diagnosis_id`,`symptom`),
   CONSTRAINT `fk_diagnosis_symptoms_patient_diagnosis_id` FOREIGN KEY (`patient_diagnosis_id`) REFERENCES `patient_diagnosis` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,7 +276,7 @@ CREATE TABLE `diagnosis_symptoms` (
 
 LOCK TABLES `diagnosis_symptoms` WRITE;
 /*!40000 ALTER TABLE `diagnosis_symptoms` DISABLE KEYS */;
-INSERT INTO `diagnosis_symptoms` VALUES (5,'abnormal_menstruation'),(5,'acidity'),(5,'anxiety'),(6,'abdominal_pain'),(6,'abnormal_menstruation');
+INSERT INTO `diagnosis_symptoms` VALUES (5,'abnormal_menstruation'),(5,'acidity'),(5,'anxiety'),(6,'abdominal_pain'),(6,'abnormal_menstruation'),(7,'abdominal_pain'),(7,'abnormal_menstruation'),(7,'acute_liver_failure'),(8,'abnormal_menstruation'),(8,'acidity'),(9,'abdominal_pain,acute_liver_failure,altered_sensorium,back_pain,chills,continuous_feel_of_urine,extra_marital_contacts,history_of_alcohol_consumption,pain_during_bowel_movements'),(10,'abdominal_pain,acute_liver_failure,altered_sensorium,back_pain,chills,continuous_feel_of_urine,extra_marital_contacts,history_of_alcohol_consumption,');
 /*!40000 ALTER TABLE `diagnosis_symptoms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,7 +302,7 @@ CREATE TABLE `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_core_user_id` FOREIGN KEY (`user_id`) REFERENCES `core_user` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-);
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,7 +328,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +354,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -380,7 +380,7 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +389,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('bv75texjw8quxynb7fpu9oao8kvkwh9k','.eJxVjEEOwiAQRe_C2pDCFAGX7nsGMsxMpWpoUtqV8e7apAvd_vfef6mE21rS1mRJE6uLMur0u2Wkh9Qd8B3rbdY013WZst4VfdCmh5nleT3cv4OCrXxr2wlFcdmM5EPvwTEFFymcUbyzI_YOcsw5IPgYGKzYDoCMGPDMxEa9P-jtOAo:1oJm2i:p7aBde_VFneuZyz75qZbYff4P-5gEwR4sEQUrR5KzhQ','2022-08-19 01:22:24.885145'),('erpaora7n0svpx9dnc8nd1eay58d2f9v','.eJxVjEEOwiAQRe_C2hBaUAaX7nuGZoYZpGogKe3KeHfbpAvd_vfef6sR1yWPa5N5nFhdFajT70YYn1J2wA8s96pjLcs8kd4VfdCmh8ryuh3u30HGlrf6QgEdeGeQxBl2cBbsLEByhBLYA6BPPbL06MSmAJ0VJo_WxI3aqD5f-As4pQ:1rGGAg:5zbAWU9KqdZc1tEvDLsrfMhkL_pwpfPcz9vwJgIR6Is','2024-01-04 10:20:54.656462'),('eryrpstnkulm2u86slaxmkfe4x3ln94z','.eJxVjEEOwiAQRe_C2hAoQ6Eu3XsGMgODVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3EWgxOn35EwPrjuJN2x3pqMra7LTHJX5EG7vLbEz8vh_h0U7OVbo0WaEJxyjEwWXWSn_KBQe5MdAxHl5IGMRrDZTFaNGG3MYzYaQCfx_gAtJDi4:1ro6Ek:rf7DxVTloDdhGok45knu4JbPT8xFROAyBE9ja2bmkNg','2024-04-06 18:36:58.681879'),('qkpaj7v6cl4f7k6qqvrw2jha8bsg5k5s','.eJxVjEsOAiEQBe_C2hB6mKHFpXvPQGi6kVEDyXxWxrsbklno9lXVe6sQ962EfZUlzKwuCow6_Y4U01NqJ_yI9d50anVbZtJd0Qdd9a2xvK6H-3dQ4lp6DflMEwIgoOUEfrRemAYDMoChyaE31qCbhNH5BEJ2RJeSyewhE6nPF-UKN50:1rAqra:7_sz7s-ANZrFEFFnNEfKOAtSqB3WA28yhoHDC7wxbpQ','2023-12-20 12:18:50.111028'),('ycd4ngufas32sx3osp8i3cw090ibsdyo','.eJxVjMsOwiAQRf-FtSEjz-LSvd9AgBmkaiAp7cr475akC92ec-59Mx-2tfit0-JnZBfm2OmXxZCeVIfAR6j3xlOr6zJHPhJ-2M5vDel1Pdq_gxJ6GeuMCqURABqiNiYKMi7R5IwVQU07T1krGciAxUwSpDhbG9HuPlkE9vkC1lQ3RQ:1r9pGj:fhXEGQogkBRtXkz_JLYbs_HD0WotX3py-cCe41U3xDs','2023-12-17 16:24:33.020831');
+INSERT INTO `django_session` VALUES ('bv75texjw8quxynb7fpu9oao8kvkwh9k','.eJxVjEEOwiAQRe_C2pDCFAGX7nsGMsxMpWpoUtqV8e7apAvd_vfef6mE21rS1mRJE6uLMur0u2Wkh9Qd8B3rbdY013WZst4VfdCmh5nleT3cv4OCrXxr2wlFcdmM5EPvwTEFFymcUbyzI_YOcsw5IPgYGKzYDoCMGPDMxEa9P-jtOAo:1oJm2i:p7aBde_VFneuZyz75qZbYff4P-5gEwR4sEQUrR5KzhQ','2022-08-19 01:22:24.885145'),('dzleuco9phb45a6bf0fsidde566k7162','.eJxVjEEOwiAQRe_C2hAoQ6Eu3XsGMgODVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3EWgxOn35EwPrjuJN2x3pqMra7LTHJX5EG7vLbEz8vh_h0U7OVbo0WaEJxyjEwWXWSn_KBQe5MdAxHl5IGMRrDZTFaNGG3MYzYaQCfx_gAtJDi4:1ronXl:CQwkcyOFJGjNOwFu4t06MIuNRBRRdAVUisdpFM90MI0','2024-04-08 16:51:29.659587'),('erpaora7n0svpx9dnc8nd1eay58d2f9v','.eJxVjEEOwiAQRe_C2hBaUAaX7nuGZoYZpGogKe3KeHfbpAvd_vfef6sR1yWPa5N5nFhdFajT70YYn1J2wA8s96pjLcs8kd4VfdCmh8ryuh3u30HGlrf6QgEdeGeQxBl2cBbsLEByhBLYA6BPPbL06MSmAJ0VJo_WxI3aqD5f-As4pQ:1rGGAg:5zbAWU9KqdZc1tEvDLsrfMhkL_pwpfPcz9vwJgIR6Is','2024-01-04 10:20:54.656462'),('qkpaj7v6cl4f7k6qqvrw2jha8bsg5k5s','.eJxVjEsOAiEQBe_C2hB6mKHFpXvPQGi6kVEDyXxWxrsbklno9lXVe6sQ962EfZUlzKwuCow6_Y4U01NqJ_yI9d50anVbZtJd0Qdd9a2xvK6H-3dQ4lp6DflMEwIgoOUEfrRemAYDMoChyaE31qCbhNH5BEJ2RJeSyewhE6nPF-UKN50:1rAqra:7_sz7s-ANZrFEFFnNEfKOAtSqB3WA28yhoHDC7wxbpQ','2023-12-20 12:18:50.111028'),('ycd4ngufas32sx3osp8i3cw090ibsdyo','.eJxVjMsOwiAQRf-FtSEjz-LSvd9AgBmkaiAp7cr475akC92ec-59Mx-2tfit0-JnZBfm2OmXxZCeVIfAR6j3xlOr6zJHPhJ-2M5vDel1Pdq_gxJ6GeuMCqURABqiNiYKMi7R5IwVQU07T1krGciAxUwSpDhbG9HuPlkE9vkC1lQ3RQ:1r9pGj:fhXEGQogkBRtXkz_JLYbs_HD0WotX3py-cCe41U3xDs','2023-12-17 16:24:33.020831');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,7 +413,7 @@ CREATE TABLE `patient_diagnosis` (
   KEY `fk_patient_diagnosis_patient_id` (`patient_id`),
   CONSTRAINT `fk_patient_diagnosis_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_patient_diagnosis_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `core_user` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +422,7 @@ CREATE TABLE `patient_diagnosis` (
 
 LOCK TABLES `patient_diagnosis` WRITE;
 /*!40000 ALTER TABLE `patient_diagnosis` DISABLE KEYS */;
-INSERT INTO `patient_diagnosis` VALUES (5,'4: [\'Hyperthyroidism\', \'GERD\']','','2024-03-24 16:02:46.264514',NULL,27,3),(6,'Hyperthyroidism','','2024-03-24 16:14:20.491982',NULL,27,2);
+INSERT INTO `patient_diagnosis` VALUES (5,'4: [\'Hyperthyroidism\', \'GERD\']','','2024-03-24 16:02:46.264514',NULL,27,3),(6,'Hyperthyroidism','','2024-03-24 16:14:20.491982',NULL,27,2),(7,'Hyperthyroidism','','2024-03-25 16:09:05.376918',NULL,27,3),(8,'4: [\'Hyperthyroidism\', \'GERD\']','','2024-03-25 16:10:44.579085',NULL,27,2),(9,'Alcoholic Hepatitis','','2024-03-25 16:52:13.017255',NULL,27,9),(10,'Alcoholic Hepatitis','','2024-03-25 16:53:28.997823',NULL,27,8);
 /*!40000 ALTER TABLE `patient_diagnosis` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -435,4 +435,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25  0:04:39
+-- Dump completed on 2024-03-25 22:24:45

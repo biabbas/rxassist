@@ -189,8 +189,9 @@ def MakePredict(request):
     c.execute("INSERT INTO patient_diagnosis (disease, patient_id, medicine, created_on, num_symptoms) VALUES (%s, %s, '', %s, %s)", (result, id, datetime.now(), Symptoms))
     diagnosis_id = c.lastrowid
     print("diagnosis Id",diagnosis_id)
-    for symptom in list_b:
-        c.execute("INSERT INTO diagnosis_symptoms (patient_diagnosis_id, symptom) VALUES (%s, %s)", (diagnosis_id, symptom))
+    #for symptom in list_b:
+        #c.execute("INSERT INTO diagnosis_symptoms (patient_diagnosis_id, symptom) VALUES (%s, %s)", (diagnosis_id, symptom))
+    c.execute("INSERT INTO diagnosis_symptoms (patient_diagnosis_id, symptom) VALUES (%s, %s)", (diagnosis_id, symptoms))
     return JsonResponse({'status': message})
 
 @login_required
