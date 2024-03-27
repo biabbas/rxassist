@@ -278,7 +278,7 @@ def doctor_commend(request):
     user_id = request.user.id 
     try:
         c = connection.cursor()
-        c.execute("SELECT * FROM patient_diagnosis")
+        c.execute("SELECT p.id,c.username,c.phonenumber,d.symptom,p.disease,p.medicine FROM patient_diagnosis p join core_user c on p.patient_id=c.id join diagnosis_symptoms d on d.patient_diagnosis_id=p.id ")
         diseases = c.fetchall()   
         context = {'diseases': diseases}
         return render(request, 'doctor/result.html', context)
@@ -294,7 +294,7 @@ def MakeMend(request):
     print('Disease ID', disease)
     print('User ID is', userid)
     c = connection.cursor()
-    c.execute("SELECT patient_id FROM patient_diagnosis WHERE id = %s", [disease_pk])
+    c.execute("SELECT patient_id FROM patient_diagnosis WHERE id = %s", [disease])
 
     row=c.fetchone()
     if row:
