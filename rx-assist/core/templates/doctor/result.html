@@ -11,10 +11,11 @@
 
     <!-- Icon Cards-->
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-12">
         <h4 class="text-center alert alert-info">List Of Disease Diagnosed</h4>
 
-        <table class="table table-hover">
+        <div class="table-responsive">
+    <table class="table table-hover",style="width: 150%">
           <thead>
             <tr>
               <th scope="col">Id</th>
@@ -38,7 +39,6 @@
               <td>{{ d.4 }}</td>
               <td>{{ d.5 }}</td>
               {% if d.5 == "" %}
-              <td>Yet Recommended</td>
               <td>
                 <input
                   class="btn btn-primary btn-sm btn_recommend text-center alert alert-info"
@@ -48,13 +48,20 @@
                 />
               </td>
               {% else %}
-              <td>{{ d.medicine }}</td>
               <td>
                 <input
                   class="btn btn-primary btn-sm btn_recommend text-center alert-info"
                   type="button"
-                  data-sid="{{d.id}}"
-                  value="Recommend again"
+                  data-sid="{{d.0}}"
+                  value="update"
+                />
+              </td>
+              <td>
+                <input
+                  class="btn btn-primary btn-sm btn_recommend text-center alert-info"
+                  type="button"
+                  data-sid="{{d.0}}"
+                  value="recommend again"
                 />
               </td>
               {% endif %}
@@ -63,7 +70,6 @@
             {% endfor %}
           </tbody>
         </table>
-
         <div id="ment_result" class="col-sm-10 offset-sm-3"></div>
 
 <!--        &lt;!&ndash;- Modal Sympooms &ndash;&gt;-->

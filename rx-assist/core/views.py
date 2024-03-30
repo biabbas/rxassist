@@ -447,3 +447,7 @@ def SaveMent(request):
     except Exception as e:
         print(e)
         return JsonResponse({'status': 'error'})
+# @login_required
+# @csrf_exempt
+# def update (request):
+#     userid = request.POST.get('userid')
