@@ -37,7 +37,7 @@
               <td>{{ d.2 }}</td>
               <td>{{ d.3 }}</td>
               <td>{{ d.4 }}</td>
-              <td>{{ d.5 }}</td>
+              <td><input type="text" value="{{ d.5 }}" name="disease" class="editable-medicine"></td>
               {% if d.5 == "" %}
               <td>
                 <input
@@ -50,7 +50,7 @@
               {% else %}
               <td>
                 <input
-                  class="btn btn-primary btn-sm btn_recommend text-center alert-info"
+                  class="btn btn-primary btn-sm btn_update text-center alert-info"
                   type="button"
                   data-sid="{{d.0}}"
                   value="update"

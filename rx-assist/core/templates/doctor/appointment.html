@@ -11,7 +11,7 @@
 
     <!-- Icon Cards-->
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-12">
         <h4 class="text-center alert alert-info">
           List of Patient Appointment
         </h4>
@@ -25,33 +25,36 @@
               <th scope="col">Day</th>
               <th scope="col">Time</th>
               <th scope="col">Doctor</th>
+              <th scope="col">medical_id</th>
               <th scope="col">Arrange Appointment</th>
             </tr>
           </thead>
           <tbody id="mytable">
             {% for d in appointment %}
             <tr>
-              <td>{{ d.id }}</td>
-              <td>{{ d.patient.username }}</td>
+              <td>{{ d.0 }}</td>
+              <td>{{ d.1 }}</td>
               <td>
-                {% if d.approved == True %}
+                {% if d.2 == 1 %}
                 <p>Approved</p>
                 {% else %}
                 <p>Pending</p>
                 {% endif %}
-                {% if d.ment_day == None %}
+                {% if d.3 == NULL %}
               <td>Not Set</td>
               {% else %}
-              <td>{{ d.ment_day|date:"M d, Y" }}</td>
-              {% endif %} {% if d.time == None %}
+              <td>{{ d.3|date:"M d, Y" }}</td>
+              {% endif %} {% if d.4 == NULL %}
               <td>Not Set</td>
               {% else %}
-              <td>{{ d.time }}</td>
-              {% endif %} {% if d.doctor.username == Null %}
+              <td>{{ d.4 }}</td>
+              {% endif %}
+              {% if d.5 == Null %}
               <td>None</td>
               {% else %}
-              <td>{{ d.doctor.username }}</td>
+              <td>{{ d.5 }}</td>
               {% endif %}
+              <td>{{ d.6 }}</td>
               </td>
 
               <td>

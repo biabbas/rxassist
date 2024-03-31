@@ -416,7 +416,7 @@ def doctor_ment(request):
     user_id = request.user.id   
     try:
         c = connection.cursor()
-        c.execute("SELECT * FROM appointments")
+        c.execute("SELECT a.id,c.username,a.approved,a.ment_day,a.time,a.doctor_id,a.medical_id from appointments a join core_user c on c.id=a.patient_id")
         appointment = c.fetchall()
         context = {'appointment': appointment}
         return render(request, 'doctor/appointment.html', context)
@@ -447,7 +447,18 @@ def SaveMent(request):
     except Exception as e:
         print(e)
         return JsonResponse({'status': 'error'})
-# @login_required
-# @csrf_exempt
-# def update (request):
-#     userid = request.POST.get('userid')
+@login_required
+@csrf_exempt
+def update(request):
+    disease = request.POST.get('disease')
+    medicine = request.POST.get('medicine')
+    print('Disease ID', disease)
+    print('medicine is', medicine)
+    c = connection.cursor()
+    c.execute("UPDATE patient_diagnosis set medicine =%s WHERE id = %s", [medicine,disease])
+    try:
+        c.execute("UPDATE patient_diagnosis set medicine =%s WHERE id = %s", [medicine,disease])
+        return JsonResponse({'status': f'updated {disease} medicine as {medicine}'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'status': 'error'})

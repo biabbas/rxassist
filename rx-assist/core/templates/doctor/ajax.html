@@ -1,7 +1,9 @@
 <script type="text/javascript">
-  $(document).ready(function () {
+  $(document).ready(function ()
+  {
 
-    $('#tbody').on('click', '.btn_recommend', function () {
+    $('#tbody').on('click', '.btn_recommend', function ()
+    {
       console.log('Button Recommend Drug Clicked');
       let disease = $(this).attr('data-sid');
       var userid = $('#tbody #user_id').val();
@@ -23,6 +25,34 @@
           else{
             x = data.status;
             alert('AI recommended: ' + x + '\nRefresh to view results.');
+          }
+        },
+      });
+    });
+
+    $('#tbody').on('click', '.btn_update', function ()
+    {
+      console.log('Button update Clicked');
+      let disease = $(this).attr('data-sid');
+      var medicine = $(this).closest('tr').find('td:eq(5)').find('input').val();;
+
+      console.log('Prediction ID is', disease);
+      console.log('medicine is', medicine);
+
+      mydata = { disease: disease,medicine: medicine };
+      $.ajax({
+        url: '{% url 'updates' %}',
+        method: 'POST',
+        data: mydata,
+
+        success: function (data) {
+          console.log('Data recorder');
+          if(data.status == 'error'){
+            alert('Error: it cannot be updated.');
+            }
+          else{
+            x = data.status;
+            alert('updated successfully');
           }
         },
       });
