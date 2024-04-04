@@ -201,7 +201,7 @@ def patient_result(request):
     user_id = request.user.id  
     try:
         c = connection.cursor()
-        c.execute("SELECT pd.id, cu.username, pd.disease, pd.medicine FROM patient_diagnosis pd Left outer JOIN core_user cu ON pd.doctor_id = cu.id WHERE patient_id = %s", [user_id])
+        c.execute("SELECT pd.id, CONCAT(cu.first_name, ' ', cu.last_name) AS doctor_name, pd.disease, pd.medicine FROM patient_diagnosis pd Left outer JOIN core_user cu ON pd.doctor_id = cu.id WHERE patient_id = %s and pd.medicine <> ''", [user_id])
         diseases = c.fetchall()     
         print("diseaseon",diseases)
         context = {'diseases': diseases}
@@ -452,12 +452,12 @@ def SaveMent(request):
 def update(request):
     disease = request.POST.get('disease')
     medicine = request.POST.get('medicine')
+    diagnosis=request.POST.get('diagnosis')
     print('Disease ID', disease)
     print('medicine is', medicine)
-    c = connection.cursor()
-    c.execute("UPDATE patient_diagnosis set medicine =%s WHERE id = %s", [medicine,disease])
     try:
-        c.execute("UPDATE patient_diagnosis set medicine =%s WHERE id = %s", [medicine,disease])
+        c = connection.cursor()
+        c.execute("UPDATE patient_diagnosis set medicine =%s,disease=%s WHERE id = %s", [medicine,diagnosis,disease])
         return JsonResponse({'status': f'updated {disease} medicine as {medicine}'})
     except Exception as e:
         print(e)

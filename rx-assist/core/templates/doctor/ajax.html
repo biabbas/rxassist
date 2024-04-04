@@ -34,12 +34,13 @@
     {
       console.log('Button update Clicked');
       let disease = $(this).attr('data-sid');
-      var medicine = $(this).closest('tr').find('td:eq(5)').find('input').val();;
+      var medicine = $(this).closest('tr').find('td:eq(5)').find('input').val();
+      var diagnosis = $(this).closest('tr').find('td:eq(4)').find('input').val();
 
       console.log('Prediction ID is', disease);
       console.log('medicine is', medicine);
 
-      mydata = { disease: disease,medicine: medicine };
+      mydata = { disease: disease,medicine: medicine,diagnosis:diagnosis };
       $.ajax({
         url: '{% url 'updates' %}',
         method: 'POST',
