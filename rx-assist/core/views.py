@@ -233,7 +233,7 @@ def MakeMent(request):
 def patient_ment(request):
     user_id = request.user.id
     c = connection.cursor()
-    c.execute("SELECT * FROM appointments WHERE patient_id=%s", [user_id])
+    c.execute("SELECT a.id, a.approved, a.time, a.ment_day, CONCAT(u.first_name, ' ', u.last_name) AS doctor_name, a.medical_id, a.patient_id FROM appointments a JOIN core_user u ON a.doctor_id = u.id where patient_id=%s", [user_id])
     appointment = c.fetchall()
     context = {'appointment': appointment}
     return render(request, 'patient/appointment.html', context)
