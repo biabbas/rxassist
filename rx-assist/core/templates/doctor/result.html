@@ -24,9 +24,9 @@
                 <th scope="col">Phonenumber</th>
                 <th scope="col">Symptoms</th>
                 <th scope="col">Disease</th>
-                <th scope="col">Message Patient</th>
                 <th scope="col">Medicine</th>
                 <th scope="col">Action</th>
+                <th scope="col"></th> <!-- New Chat column -->
               </tr>
             </thead>
             <tbody id="tbody">
@@ -39,10 +39,6 @@
                 <td>{{ d.2 }}</td>
                 <td>{{ d.3 }}</td>
                 <td>{{ d.4 }}</td>
-                <td>
-                  <textarea rows="3" class="form-control message-textarea"></textarea>
-                  <button class="btn btn-primary btn-sm send-button">Send</button>
-                </td>
                 <td><input type="text" value="{{ d.5 }}" name="disease" class="editable-medicine"></td>
                 {% if d.5 == "" %}
                 <td>
@@ -71,8 +67,10 @@
                   />
                 </td>
                 {% endif %}
+                <td> <!-- Chat button column -->
+                  <a href="{% ADD URL HERE %}" class="btn btn-primary btn-sm text-center alert alert-info">Chat</a>
+                </td>
               </tr>
-
               {% endfor %}
             </tbody>
           </table>
