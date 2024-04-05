@@ -23,7 +23,7 @@
           <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-primary" id="predict_btn">
-                Predict
+                Submit
               </button>
             </div>
           </div>
@@ -90,8 +90,7 @@
                     console.log('Data Sent To The Backend');
                     console.log('Predicted Disease', x);
                     $('#result').html('');
-                    $('#result').append('<h3 style="width: 60%">Our prediction: ' + x +'</h3><br>');
-                    $('#result').append('<p style="color: red; width: 50%;">Note: This AI prediction serves as an initial diagnosis for your symptoms. It is essential to understand that AI predictions are preliminary and subject to further review by our medical professionals. Please await our doctors\' comprehensive assessment for the final prognosis tailored to your specific health needs.</p>');
+                    $('#result').append('<p style="color: red; width: 50%;">The symptoms has been sent to doctor wait for the results and you can check on diagnosis result for updates.</p>');
                 }
             },
         });
