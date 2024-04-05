@@ -452,7 +452,7 @@ def SaveMent(request):
 def update(request):
     disease = request.POST.get('disease')
     medicine = request.POST.get('medicine')
-    diagnosis=request.POST.get('diagnosis')
+    diagnosis = request.POST.get('diagnosis')
     print('Disease ID', disease)
     print('medicine is', medicine)
     try:
