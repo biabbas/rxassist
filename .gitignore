@@ -7,3 +7,6 @@ rx-assist/model/*.pkl
 rx-assis/__pycache__
 env
 .gitignore
+venv
+.idea
+*.DS_STORE

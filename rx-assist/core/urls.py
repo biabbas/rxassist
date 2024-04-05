@@ -16,6 +16,7 @@ urlpatterns = [
     path('logout/', views.logoutView, name='logout'),
     path('doctor/', views.doctor_home, name='doctor'),
     path('commend/', views.doctor_commend, name='commend'),
+    path('update_medicine/', views.update, name='updates'),
     path('commend/predict/', views.MakeMend, name='mend'),
     path('meet/', views.doctor_ment, name='meet_list'),
     path('meet/save/', views.SaveMent, name='savement'),

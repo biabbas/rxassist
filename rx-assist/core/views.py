@@ -201,7 +201,7 @@ def patient_result(request):
     user_id = request.user.id  
     try:
         c = connection.cursor()
-        c.execute("SELECT pd.id, cu.username, pd.disease, pd.medicine FROM patient_diagnosis pd Left outer JOIN core_user cu ON pd.doctor_id = cu.id WHERE patient_id = %s", [user_id])
+        c.execute("SELECT pd.id, CONCAT(cu.first_name, ' ', cu.last_name) AS doctor_name, pd.disease, pd.medicine FROM patient_diagnosis pd Left outer JOIN core_user cu ON pd.doctor_id = cu.id WHERE patient_id = %s and pd.medicine <> ''", [user_id])
         diseases = c.fetchall()     
         print("diseaseon",diseases)
         context = {'diseases': diseases}
@@ -233,7 +233,7 @@ def MakeMent(request):
 def patient_ment(request):
     user_id = request.user.id
     c = connection.cursor()
-    c.execute("SELECT * FROM appointments WHERE patient_id=%s", [user_id])
+    c.execute("SELECT a.id, a.approved, a.time, a.ment_day, CONCAT(u.first_name, ' ', u.last_name) AS doctor_name, a.medical_id, a.patient_id FROM appointments a JOIN core_user u ON a.doctor_id = u.id where patient_id=%s", [user_id])
     appointment = c.fetchall()
     context = {'appointment': appointment}
     return render(request, 'patient/appointment.html', context)
@@ -278,7 +278,7 @@ def doctor_commend(request):
     user_id = request.user.id 
     try:
         c = connection.cursor()
-        c.execute("SELECT * FROM patient_diagnosis")
+        c.execute("SELECT p.id,c.username,c.phonenumber,d.symptom,p.disease,p.medicine FROM patient_diagnosis p join core_user c on p.patient_id=c.id join diagnosis_symptoms d on d.patient_diagnosis_id=p.id ")
         diseases = c.fetchall()   
         context = {'diseases': diseases}
         return render(request, 'doctor/result.html', context)
@@ -416,7 +416,7 @@ def doctor_ment(request):
     user_id = request.user.id   
     try:
         c = connection.cursor()
-        c.execute("SELECT * FROM appointments")
+        c.execute("SELECT a.id,c.username,a.approved,a.ment_day,a.time,a.doctor_id,a.medical_id from appointments a join core_user c on c.id=a.patient_id")
         appointment = c.fetchall()
         context = {'appointment': appointment}
         return render(request, 'doctor/appointment.html', context)
@@ -444,6 +444,21 @@ def SaveMent(request):
         else:
             print('Appointment Not Exist')
             return JsonResponse({'status': 'not exist'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'status': 'error'})
+@login_required
+@csrf_exempt
+def update(request):
+    disease = request.POST.get('disease')
+    medicine = request.POST.get('medicine')
+    diagnosis = request.POST.get('diagnosis')
+    print('Disease ID', disease)
+    print('medicine is', medicine)
+    try:
+        c = connection.cursor()
+        c.execute("UPDATE patient_diagnosis set medicine =%s,disease=%s WHERE id = %s", [medicine,diagnosis,disease])
+        return JsonResponse({'status': f'updated {disease} medicine as {medicine}'})
     except Exception as e:
         print(e)
         return JsonResponse({'status': 'error'})
