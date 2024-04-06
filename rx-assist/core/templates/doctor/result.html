@@ -80,23 +80,6 @@
         </table>
         <div id="ment_result" class="col-sm-10 offset-sm-3"></div>
 
-    <script>
-          function handlemessage(button){
-          console.log('Loading messages');
-          var diagnosis = button.dataset.sid;
-          var mydata = { diag_id : diagnosis };
-          $.ajax({
-          url: '{% url 'chats' %}',
-          method: 'POST',
-          data: mydata,
-          success: function(data) {
-          
-          },
-          });
-          }
-          
-</script>
-
 
 <!--        &lt;!&ndash;- Modal Sympooms &ndash;&gt;-->
 <!--        <div class="edit-form">-->

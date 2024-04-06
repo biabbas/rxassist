@@ -21,10 +21,11 @@
               <th scope="col">Disease</th>
               <th scope="col">Medicine</th>
               <th scope="col">Appointment</th>
+              <th scope="col">Chat with doctor</th>
             </tr>
           </thead>
           <tbody id="tbody">
-            <input value="{{ user.id }}" type="hidden" name="" id="user_id" />
+            <input value="{{ user.id }}" type = "hidden"name="" id="user_id" />
 
             {% for d in diseases %}
             <tr>
@@ -46,6 +47,15 @@
 />
 
               </td>
+            <td>
+            <form method="POST" action="{% url 'chats' %}">
+             {% csrf_token %}
+             <input type="hidden" name="diag_id" value="{{ d.0 }}">
+             <button class="btn btn-primary text-center alert alert-info" type="submit">Messages</button>
+           </form>
+
+           </td>
+
             </tr>
 
             {% endfor %}
